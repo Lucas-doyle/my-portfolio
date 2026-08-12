@@ -18,7 +18,7 @@ export const projects: Project[] = [
       "Enterprise knowledge assistant powered by LLMs, semantic search and Retrieval-Augmented Generation.",
     longDescription:
       "An AI-powered knowledge platform designed to help users retrieve useful information from large collections of enterprise content. The system combines LLMs, embeddings, vector search and a modern full-stack interface to produce contextual answers.",
-    image: "/images/ai-assistant.jpg",
+    image: "/images/ai-assistant.png",
     technologies: [
       "Python",
       "FastAPI",
@@ -45,7 +45,7 @@ export const projects: Project[] = [
       "Multi-agent automation platform for reducing repetitive business workflows.",
     longDescription:
       "An intelligent automation platform that coordinates multiple AI agents to execute structured workflows. The architecture combines LangGraph, LLM function calling and backend services to automate repetitive processes.",
-    image: "/images/workflow-ai.jpg",
+    image: "/images/workflow-ai.png",
     technologies: [
       "Python",
       "FastAPI",
@@ -72,7 +72,7 @@ export const projects: Project[] = [
       "Scalable SaaS analytics platform with dashboards, APIs and real-time operational insights.",
     longDescription:
       "A full-stack SaaS analytics platform designed around operational visibility. The system processes business data and presents it through responsive dashboards, charts and API-driven interfaces.",
-    image: "/images/analytics.jpg",
+    image: "/images/analytics.png",
     technologies: [
       "React",
       "Next.js",
@@ -98,7 +98,7 @@ export const projects: Project[] = [
       "Operational monitoring platform providing real-time visibility into large-scale business activity.",
     longDescription:
       "A real-time web application for teams that need immediate visibility into operational activity. WebSockets and API services allow dashboards to update without requiring manual refreshes.",
-    image: "/images/saas-platform.jpg",
+    image: "/images/saas-platform.png",
     technologies: [
       "React",
       "Next.js",
@@ -124,7 +124,7 @@ export const projects: Project[] = [
       "Production API platform built around REST, GraphQL and scalable backend services.",
     longDescription:
       "A backend-focused platform designed to support high-traffic applications. The architecture emphasizes clean API boundaries, scalability, service separation, database performance and reliable deployment.",
-    image: "/images/api-platform.jpg",
+    image: "/images/api-platform.png",
     technologies: [
       "Python",
       "FastAPI",
@@ -151,7 +151,7 @@ export const projects: Project[] = [
       "Modern AI SaaS platform combining intelligent assistance with workflow automation.",
     longDescription:
       "A modern AI productivity experience combining a responsive frontend, backend APIs and Generative AI services. The platform focuses on making complex workflows easier to complete through intelligent assistance.",
-    image: "/images/profile-working.jpg",
+    image: "/images/profile-working.png",
     technologies: [
       "Next.js",
       "React",
