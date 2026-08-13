@@ -68,7 +68,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <a
-            href="/Lucas-Doyle-CV.pdf"
+            href="/LucasDoyleResume.pdf"
             download
             className="hidden items-center gap-2 rounded-lg bg-violet-600 px-4 py-2 text-[11px] font-semibold text-white transition hover:bg-violet-500 sm:flex"
           >
@@ -104,7 +104,7 @@ export default function Navbar() {
             ))}
 
             <a
-              href="/Lucas-Doyle-CV.pdf"
+              href="/LucasDoyleResume.pdf"
               download
               className="mt-2 flex w-fit items-center gap-2 rounded-lg bg-violet-600 px-4 py-2 text-xs font-semibold"
             >

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import {
-  GitBranch,
   Link as LinkIcon,
   Mail,
 } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -32,10 +32,13 @@ export default function Footer() {
             </a>
 
             <a
-              href="#"
+              href="https://github.com/Lucas-doyle/my-portfolio"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-400 transition hover:border-violet-500/40 hover:text-violet-400"
             >
-              <GitBranch size={15} />
+              <FaGithub size={15} />
             </a>
 
             <a

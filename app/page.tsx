@@ -73,7 +73,7 @@ function FeatureCard({
     <div>
       <div className="relative inline-block">
         <div className="absolute -left-4 top-7 h-40 border-l border-white/1 bg-violet-500/60" />
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-violet-500/40 bg-violet-500/5 text-violet-400">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-violet-500/40 bg-violet-500/5 text-violet-400 mt-7">
           {icon}
         </div>
       </div>
