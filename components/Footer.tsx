@@ -26,6 +26,8 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <a
               href="mailto:bruno.silva.94410@gmail.com"
+              target="_blank"
+              rel="noopener norefeerer"
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-400 transition hover:border-violet-500/40 hover:text-violet-400"
             >
               <Mail size={15} />

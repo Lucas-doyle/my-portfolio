@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-
+import { BriefcaseBusiness, Mail } from "lucide-react";
 function SmallIcon({
   children,
 }: {
@@ -223,16 +223,18 @@ export default function HomePage() {
             <div className="mt-7 flex gap-3">
               <Link
                 href="/projects"
-                className="rounded-md bg-violet-600 px-5 py-3 text-[13px] font-semibold text-white shadow-lg shadow-violet-900/20 transition hover:bg-violet-500"
+                className="inline-flex items-center gap-2 rounded-xl bg-violet-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-violet-500"
               >
-                ◉ &nbsp;View My Work
+                <BriefcaseBusiness size={18} />
+                View My Work
               </Link>
 
               <Link
                 href="/contact"
-                className="rounded-md border border-white/15 px-5 py-3 text-[13px] font-semibold text-white transition hover:border-violet-500"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-6 py-3 text-sm font-medium text-white transition hover:bg-white/5"
               >
-                ◎ &nbsp;Get In Touch
+                <Mail size={18} />
+                Get in Touch
               </Link>
             </div>
           </div>
