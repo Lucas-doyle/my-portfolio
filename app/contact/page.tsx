@@ -31,11 +31,11 @@ export default function ContactPage() {
               </p>
 
               <div className="mt-9 space-y-6">
-                <ContactItem
-                  icon={<Mail size={16} />}
-                  title="Email"
-                  value="bruno.silva.94410@gmail.com"
-                />
+                  <ContactItem
+                    icon={<Mail size={16} />}
+                    title="Email"
+                    value="bruno.silva.94410@gmail.com"
+                  />
 
                 <ContactItem
                   icon={<Phone size={16} />}
@@ -57,8 +57,21 @@ export default function ContactPage() {
               </div>
 
               <div className="mt-8 flex gap-2">
-                <Social icon={<Mail size={15} />} />
-                <Social icon={<Phone size={15} />} />
+                <div className="group relative">
+                  <Social icon={<Mail size={15} />} />
+
+                  <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[12px] text-white opacity-0 transition group-hover:opacity-100">
+                    bruno.silva.94410@gmail.com
+                  </span>
+                </div>
+
+                <div className="group relative">
+                  <Social icon={<Phone size={15} />} />
+
+                  <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[12px] text-white opacity-0 transition group-hover:opacity-100">
+                    +353 86 274 5183
+                  </span>
+                </div>
                 <Social icon={<Globe size={15} />} />
               </div>
             </div>
