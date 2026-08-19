@@ -1,6 +1,57 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { BriefcaseBusiness, Mail } from "lucide-react";
+import { useState, useEffect } from "react";
+
+function TypingEffect() {
+  const phrases = [
+    "AI Full Stack Developer",
+    "Senior Software Engineer",
+    "Creating AI-Powered Solutions",
+    "Cloud-Native Applications"
+  ];
+  
+  const [currentPhrase, setCurrentPhrase] = useState("");
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(150);
+
+  useEffect(() => {
+    const currentFullPhrase = phrases[phraseIndex];
+    
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        if (currentPhrase.length < currentFullPhrase.length) {
+          setCurrentPhrase(currentFullPhrase.substring(0, currentPhrase.length + 1));
+          setTypingSpeed(150);
+        } else {
+          setIsDeleting(true);
+          setTypingSpeed(2000); // Pause before deleting
+        }
+      } else {
+        if (currentPhrase.length > 0) {
+          setCurrentPhrase(currentPhrase.substring(0, currentPhrase.length - 1));
+          setTypingSpeed(75);
+        } else {
+          setIsDeleting(false);
+          setPhraseIndex((phraseIndex + 1) % phrases.length);
+          setTypingSpeed(500); // Pause before typing next phrase
+        }
+      }
+    }, typingSpeed);
+
+    return () => clearTimeout(timer);
+  }, [currentPhrase, isDeleting, phraseIndex, phrases, typingSpeed]);
+
+  return (
+    <h1 className="mt-1 h-[100px] md:h-[120px] text-[48px] font-bold leading-[1.05] tracking-tight md:text-[65px] text-white">
+      {currentPhrase}
+    </h1>
+  );
+}
+
 function SmallIcon({
   children,
 }: {
@@ -20,13 +71,27 @@ function SmallIcon({
 function DeveloperLaptop() {
   return (
     <div className="relative mx-auto h-[550px] w-full max-w-[670px]">
-      <Image
-        src="/images/laptop-dev.png"
-        alt="Developer laptop setup with code, plant, and coffee"
-        fill
-        className="object-contain"
-        priority
-      />
+      {/* Glow effect background */}
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-600/20 via-purple-500/10 to-transparent blur-3xl" />
+      
+      {/* Subtle gradient overlay */}
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-violet-900/10 to-transparent" />
+      
+      {/* Image with subtle border and shadow */}
+      <div className="relative h-full w-full rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm shadow-2xl shadow-violet-500/10">
+        <Image
+          src="/images/laptop-dev.png"
+          alt="Developer laptop setup with code, plant, and coffee"
+          fill
+          className="object-contain"
+          priority
+        />
+      </div>
+      
+      {/* Floating particles effect */}
+      <div className="absolute -right-4 top-10 h-2 w-2 rounded-full bg-violet-400/60 blur-[2px] animate-pulse" />
+      <div className="absolute -left-2 bottom-20 h-3 w-3 rounded-full bg-purple-400/50 blur-[3px] animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="absolute right-10 bottom-10 h-2 w-2 rounded-full bg-violet-300/70 blur-[2px] animate-pulse" style={{ animationDelay: '2s' }} />
     </div>
   );
 }
@@ -107,10 +172,6 @@ export default function HomePage() {
             <span className="text-[22px] font-bold leading-none text-violet-500">
               Λ
             </span>
-
-            <span className="text-[10px] font-semibold tracking-wide text-white">
-              Lucas Doyle
-            </span>
           </Link>
 
           {/* Navigation */}
@@ -181,42 +242,31 @@ export default function HomePage() {
       ===================================================== */}
 
       <section className="mx-auto max-w-[1280px] px-8 pb-10 pt-12">
-        <div className="grid items-center gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="grid items-center gap-6 lg:grid-cols-[1fr_1fr]">
           {/* LEFT SIDE */}
           <div className="relative z-10">
-            <p className="text-[15px] font-medium text-violet-400">
-              Hi, I&apos;m
-            </p>
+            <TypingEffect />
 
-            <h1 className="mt-1 text-[48px] font-bold leading-[1.05] tracking-tight md:text-[70px]">
-              Lucas{" "}
-              <span className="text-violet-500">Doyle</span>
-            </h1>
-
-            <h2 className="mt-2 text-[20px] font-semibold text-white md:text-[25px]">
-              AI Full Stack Software Engineer
-            </h2>
-
-            <p className="mt-4 max-w-[600px] text-[14px] leading-8 text-gray-400">
+            <p className="mt-15 max-w-[600px] text-[14px] leading-8 text-gray-400 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
               I build scalable SaaS platforms, cloud-native applications,
               and AI-powered products that solve real-world problems and
               deliver measurable business impact.
             </p>
 
-            <p className="mt-4 text-[15px] text-gray-400">
-              <span className="text-gray-300">Python</span>
+            <p className="mt-4 text-[15px] text-gray-400 opacity-0 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <span className="text-gray-300 hover:text-violet-400 transition-colors cursor-default">Python</span>
               <span className="mx-2 text-violet-500">·</span>
-              <span className="text-gray-300">TypeScript</span>
+              <span className="text-gray-300 hover:text-violet-400 transition-colors cursor-default">TypeScript</span>
               <span className="mx-2 text-violet-500">·</span>
-              <span className="text-gray-300">React</span>
+              <span className="text-gray-300 hover:text-violet-400 transition-colors cursor-default">React</span>
               <span className="mx-2 text-violet-500">·</span>
-              <span className="text-gray-300">Next.js</span>
+              <span className="text-gray-300 hover:text-violet-400 transition-colors cursor-default">Next.js</span>
               <span className="mx-2 text-violet-500">·</span>
-              <span className="text-gray-300">Node.js</span>
+              <span className="text-gray-300 hover:text-violet-400 transition-colors cursor-default">Node.js</span>
               <span className="mx-2 text-violet-500">·</span>
-              <span className="text-gray-300">AI</span>
+              <span className="text-gray-300 hover:text-violet-400 transition-colors cursor-default">AI</span>
               <span className="mx-2 text-violet-500">·</span>
-              <span className="text-gray-300">AWS</span>
+              <span className="text-gray-300 hover:text-violet-400 transition-colors cursor-default">AWS</span>
             </p>
 
             {/* Buttons */}
@@ -411,7 +461,7 @@ export default function HomePage() {
       <footer className="mx-auto max-w-[1180px] px-6 pb-5 pt-2">
         <div className="flex items-center justify-between border-t border-white/[0.04] pt-4">
           <p className="text-[8px] text-gray-600">
-            © {new Date().getFullYear()} Lucas Doyle
+            © {new Date().getFullYear()}
           </p>
 
           <p className="text-[8px] text-gray-600">

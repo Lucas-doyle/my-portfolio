@@ -97,10 +97,6 @@ export default function AboutPage() {
             <span className="text-[22px] font-bold leading-none text-violet-500">
               Λ
             </span>
-
-            <span className="text-[10px] font-semibold tracking-wide text-white">
-              Lucas Doyle
-            </span>
           </Link>
 
           {/* Navigation */}
@@ -399,7 +395,7 @@ export default function AboutPage() {
 
               <Image
                 src="/images/about-developer.png"
-                alt="Lucas Doyle - AI Full Stack Software Engineer"
+                alt="AI Full Stack Software Engineer"
                 width={900}
                 height={900}
                 priority
@@ -621,7 +617,7 @@ export default function AboutPage() {
         <div className="flex items-center justify-between border-t border-white/[0.04] pt-4">
 
           <p className="text-[8px] text-gray-600">
-            © {new Date().getFullYear()} Lucas Doyle
+            © {new Date().getFullYear()}
           </p>
 
           <p className="text-[8px] text-gray-600">

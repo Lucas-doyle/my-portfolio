@@ -11,14 +11,7 @@ export default function Footer() {
       <div className="container-page py-5">
         <div className="flex flex-col justify-between gap-7 md:flex-row md:items-center">
           <div>
-            <Link
-              href="/"
-              className="text-lg font-bold text-white"
-            >
-              Lucas<span className="text-violet-500">.</span>
-            </Link>
-
-            <p className="mt-2 text-xs text-gray-500">
+            <p className="text-xs text-gray-500">
               AI Full Stack Software Engineer
             </p>
           </div>
@@ -53,7 +46,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 border-t border-white/6 pt-6 text-center text-[11px] text-gray-600">
-          © {new Date().getFullYear()} Lucas Doyle. All rights reserved.
+          © {new Date().getFullYear()}. All rights reserved.
         </div>
       </div>
     </footer>

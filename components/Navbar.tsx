@@ -33,10 +33,6 @@ export default function Navbar() {
           <span className="text-2xl font-black text-violet-500">
             L
           </span>
-
-          <span className="text-sm font-semibold text-white">
-            Lucas Doyle
-          </span>
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
