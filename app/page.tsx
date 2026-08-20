@@ -225,14 +225,6 @@ export default function HomePage() {
               <span className="h-2 w-2 rounded-full bg-green-400" />
               Available
             </div>
-
-            <a
-              href="/Lucas-Doyle-Resume.pdf"
-              download
-              className="rounded-md bg-violet-600 px-3 py-1.5 text-[8px] font-semibold text-white shadow-lg shadow-violet-900/20 transition hover:bg-violet-500"
-            >
-              ↓ Download CV
-            </a>
           </div>
         </div>
       </header>
