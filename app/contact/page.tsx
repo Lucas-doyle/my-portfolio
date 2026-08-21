@@ -7,8 +7,58 @@ import {
   Send,
   Globe,
 } from "lucide-react";
+import { useState } from "react";
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+        setErrorMessage(data.error || 'Failed to send message');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      setErrorMessage('Network error. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="page">
       <div className="container-page py-24">
@@ -77,39 +127,68 @@ export default function ContactPage() {
             </div>
 
             {/* FORM */}
-            <div className="card rounded-xl p-6 md:p-8">
+            <form onSubmit={handleSubmit} className="card rounded-xl p-6 md:p-8">
               <div className="grid gap-4 sm:grid-cols-2">
                 <input
+                  name="name"
                   placeholder="Your Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
                   className="h-12 rounded-lg border border-white/10 bg-[#080d1d] px-4 text-xs text-white outline-none placeholder:text-gray-600 focus:border-violet-500/60"
                 />
 
                 <input
+                  name="email"
                   placeholder="Your Email"
                   type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
                   className="h-12 rounded-lg border border-white/10 bg-[#080d1d] px-4 text-xs text-white outline-none placeholder:text-gray-600 focus:border-violet-500/60"
                 />
               </div>
 
               <input
+                name="subject"
                 placeholder="Subject"
+                value={formData.subject}
+                onChange={handleChange}
+                required
                 className="mt-4 h-12 w-full rounded-lg border border-white/10 bg-[#080d1d] px-4 text-xs text-white outline-none placeholder:text-gray-600 focus:border-violet-500/60"
               />
 
               <textarea
+                name="message"
                 placeholder="Your Message"
+                value={formData.message}
+                onChange={handleChange}
+                required
                 rows={8}
                 className="mt-4 w-full resize-none rounded-lg border border-white/10 bg-[#080d1d] px-4 py-4 text-xs text-white outline-none placeholder:text-gray-600 focus:border-violet-500/60"
               />
 
+              {submitStatus === 'success' && (
+                <div className="mt-4 rounded-lg bg-green-500/10 border border-green-500/20 px-4 py-3 text-xs text-green-400">
+                  Message sent successfully! I'll get back to you soon.
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="mt-4 rounded-lg bg-red-500/10 border border-red-500/20 px-4 py-3 text-xs text-red-400">
+                  {errorMessage}
+                </div>
+              )}
+
               <button
-                type="button"
-                className="mt-4 flex items-center gap-2 rounded-lg bg-violet-600 px-6 py-3 text-xs font-semibold text-white transition hover:bg-violet-500"
+                type="submit"
+                disabled={isSubmitting}
+                className="mt-4 flex items-center gap-2 rounded-lg bg-violet-600 px-6 py-3 text-xs font-semibold text-white transition hover:bg-violet-500 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
                 <Send size={13} />
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
