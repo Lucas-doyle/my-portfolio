@@ -160,80 +160,12 @@ function FeatureCard({
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[#050811] text-white">
-      {/* =====================================================
-          NAVBAR
-      ===================================================== */}
-
-      <header className="border-b border-white/[0.06]">
-        <div className="mx-auto flex h-[58px] max-w-[1180px] items-center justify-between px-6">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-[22px] font-bold leading-none text-violet-500">
-              Λ
-            </span>
-          </Link>
-
-          {/* Navigation */}
-          <nav className="hidden items-center gap-7 md:flex">
-            <Link
-              href="/"
-              className="border-b border-violet-500 pb-1 text-[9px] font-medium text-violet-400"
-            >
-              Home
-            </Link>
-
-            <Link
-              href="/about"
-              className="text-[9px] text-gray-400 transition hover:text-white"
-            >
-              About
-            </Link>
-
-            <Link
-              href="/skills"
-              className="text-[9px] text-gray-400 transition hover:text-white"
-            >
-              Skills
-            </Link>
-
-            <Link
-              href="/projects"
-              className="text-[9px] text-gray-400 transition hover:text-white"
-            >
-              Projects
-            </Link>
-
-            <Link
-              href="/experience"
-              className="text-[9px] text-gray-400 transition hover:text-white"
-            >
-              Experience
-            </Link>
-
-            <Link
-              href="/contact"
-              className="text-[9px] text-gray-400 transition hover:text-white"
-            >
-              Contact
-            </Link>
-          </nav>
-
-          {/* Right controls */}
-          <div className="flex items-center gap-3">
-            <div className="hidden items-center gap-1.5 text-[8px] text-gray-500 sm:flex">
-              <span className="h-2 w-2 rounded-full bg-green-400" />
-              Available
-            </div>
-          </div>
-        </div>
-      </header>
-
+    <main className="page">
       {/* =====================================================
           HERO
       ===================================================== */}
 
-      <section className="mx-auto max-w-[1280px] px-8 pb-10 pt-12">
+      <section className="container-page py-12">
         <div className="grid items-center gap-6 lg:grid-cols-[1fr_1fr]">
           {/* LEFT SIDE */}
           <div className="relative z-10">
@@ -361,8 +293,8 @@ export default function HomePage() {
           ABOUT PREVIEW
       ===================================================== */}
 
-      <section className="mx-auto max-w-[1280px] px-6 pb-8">
-        <div className="rounded-xl border border-white/[0.06] bg-[#090e1b] px-5 py-5 md:px-6">
+      <section className="container-page pb-8">
+        <div className="card rounded-xl px-5 py-5 md:px-6">
           <div className="grid gap-3 lg:grid-cols-[1.4fr_0.9fr_0.9fr_0.9fr]">
             {/* About text */}
             <div>
@@ -445,22 +377,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* =====================================================
-          FOOTER
-      ===================================================== */}
-
-      <footer className="mx-auto max-w-[1180px] px-6 pb-5 pt-2">
-        <div className="flex items-center justify-between border-t border-white/[0.04] pt-4">
-          <p className="text-[8px] text-gray-600">
-            © {new Date().getFullYear()}
-          </p>
-
-          <p className="text-[8px] text-gray-600">
-            AI · Full Stack · Software Engineering
-          </p>
-        </div>
-      </footer>
     </main>
   );
 }

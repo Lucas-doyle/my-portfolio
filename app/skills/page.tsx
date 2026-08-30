@@ -35,6 +35,28 @@ import {
   SiVercel,
 } from "react-icons/si";
 
+/*
+ * Small custom layers icon used for RAG.
+ */
+function LayersIcon({ size = 20 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m12 2 9 5-9 5-9-5 9-5Z" />
+      <path d="m3 12 9 5 9-5" />
+      <path d="m3 17 9 5 9-5" />
+    </svg>
+  );
+}
+
 const groups = [
   {
     title: "AI & Machine Learning",
@@ -271,28 +293,6 @@ const technologies = [
     color: "#F97316",
   },
 ];
-
-/*
- * Small custom layers icon used for RAG.
- */
-function LayersIcon({ size = 20 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m12 2 9 5-9 5-9-5 9-5Z" />
-      <path d="m3 12 9 5 9-5" />
-      <path d="m3 17 9 5 9-5" />
-    </svg>
-  );
-}
 
 export default function SkillsPage() {
   return (

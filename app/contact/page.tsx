@@ -107,22 +107,37 @@ export default function ContactPage() {
               </div>
 
               <div className="mt-8 flex gap-2">
-                <div className="group relative">
-                  <Social icon={<Mail size={15} />} />
-
+                <a
+                  href="mailto:bruno.silva.94410@gmail.com"
+                  className="group relative flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-500 hover:border-violet-500/30 hover:text-violet-400"
+                >
+                  <Mail size={15} />
                   <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[12px] text-white opacity-0 transition group-hover:opacity-100">
                     bruno.silva.94410@gmail.com
                   </span>
-                </div>
+                </a>
 
-                <div className="group relative">
-                  <Social icon={<Phone size={15} />} />
-
+                <a
+                  href="tel:+353862745183"
+                  className="group relative flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-500 hover:border-violet-500/30 hover:text-violet-400"
+                >
+                  <Phone size={15} />
                   <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[12px] text-white opacity-0 transition group-hover:opacity-100">
                     +353 86 274 5183
                   </span>
-                </div>
-                <Social icon={<Globe size={15} />} />
+                </a>
+
+                <a
+                  href="https://github.com/Lucas-doyle"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-500 hover:border-violet-500/30 hover:text-violet-400"
+                >
+                  <Globe size={15} />
+                  <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[12px] text-white opacity-0 transition group-hover:opacity-100">
+                    GitHub
+                  </span>
+                </a>
               </div>
             </div>
 
@@ -221,17 +236,5 @@ function ContactItem({
         </p>
       </div>
     </div>
-  );
-}
-
-function Social({
-  icon,
-}: {
-  icon: React.ReactNode;
-}) {
-  return (
-    <button className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-500 hover:border-violet-500/30 hover:text-violet-400">
-      {icon}
-    </button>
   );
 }

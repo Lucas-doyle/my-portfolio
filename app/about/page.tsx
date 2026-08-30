@@ -79,93 +79,13 @@ function Stat({
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-[#050811] text-white">
-
-      {/* =====================================================
-          NAVBAR
-          ===================================================== */}
-
-      <header className="border-b border-white/[0.06]">
-        <div className="mx-auto flex h-[58px] max-w-[1180px] items-center justify-between px-6">
-
-          {/* Logo */}
-
-          <Link
-            href="/"
-            className="flex items-center gap-2"
-          >
-            <span className="text-[22px] font-bold leading-none text-violet-500">
-              Λ
-            </span>
-          </Link>
-
-          {/* Navigation */}
-
-          <nav className="hidden items-center gap-7 md:flex">
-
-            <Link
-              href="/"
-              className="text-[9px] text-gray-400 transition hover:text-white"
-            >
-              Home
-            </Link>
-
-            <Link
-              href="/about"
-              className="border-b border-violet-500 pb-1 text-[9px] font-medium text-violet-400"
-            >
-              About
-            </Link>
-
-            <Link
-              href="/skills"
-              className="text-[9px] text-gray-400 transition hover:text-white"
-            >
-              Skills
-            </Link>
-
-            <Link
-              href="/projects"
-              className="text-[9px] text-gray-400 transition hover:text-white"
-            >
-              Projects
-            </Link>
-
-            <Link
-              href="/experience"
-              className="text-[9px] text-gray-400 transition hover:text-white"
-            >
-              Experience
-            </Link>
-
-            <Link
-              href="/contact"
-              className="text-[9px] text-gray-400 transition hover:text-white"
-            >
-              Contact
-            </Link>
-
-          </nav>
-
-          {/* Right side */}
-
-          <div className="flex items-center gap-3">
-
-            <div className="hidden items-center gap-1.5 text-[8px] text-gray-500 sm:flex">
-              <span className="h-2 w-2 rounded-full bg-green-400" />
-              Available
-            </div>
-
-          </div>
-        </div>
-      </header>
-
+    <main className="page">
 
       {/* =====================================================
           ABOUT HERO
           ===================================================== */}
 
-      <section className="mx-auto max-w-[1180px] px-6 pb-8 pt-10">
+      <section className="container-page py-10">
 
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_1fr]">
 
@@ -383,7 +303,7 @@ export default function AboutPage() {
 
             {/* Image container */}
 
-            <div className="relative mx-auto max-w-[530px]  overflow-hidden rounded-xl border border-white/[0.08] bg-[#090e1b]">
+            <div className="card relative mx-auto max-w-[530px] overflow-hidden rounded-xl">
 
               <Image
                 src="/images/about-developer.png"
@@ -490,9 +410,9 @@ export default function AboutPage() {
           STATISTICS
           ===================================================== */}
 
-      <section className="mx-auto max-w-[1180px] px-6 pb-10">
+      <section className="container-page pb-10">
 
-        <div className="grid grid-cols-2 rounded-xl border border-white/[0.06] bg-[#090e1b] px-6 py-6 md:grid-cols-4">
+        <div className="card grid grid-cols-2 rounded-xl px-6 py-6 md:grid-cols-4">
 
           <Stat
             number="20+"
@@ -523,14 +443,14 @@ export default function AboutPage() {
           EDUCATION / CAREER
           ===================================================== */}
 
-      <section className="mx-auto max-w-[1180px] px-6 pb-12">
+      <section className="container-page pb-12">
 
         <div className="grid gap-5 md:grid-cols-2">
 
 
           {/* Education */}
 
-          <div className="rounded-xl border border-white/[0.06] bg-[#090e1b] p-6">
+          <div className="card rounded-xl p-6">
 
             <p className="text-[10px] font-medium text-violet-400">
               Education
@@ -573,7 +493,7 @@ export default function AboutPage() {
 
           {/* Current role */}
 
-          <div className="rounded-xl border border-white/[0.06] bg-[#090e1b] p-6">
+          <div className="card rounded-xl p-6">
 
             <p className="text-[10px] font-medium text-violet-400">
               Current Role
@@ -598,27 +518,6 @@ export default function AboutPage() {
         </div>
 
       </section>
-
-
-      {/* =====================================================
-          FOOTER
-          ===================================================== */}
-
-      <footer className="mx-auto max-w-[1180px] px-6 pb-5">
-
-        <div className="flex items-center justify-between border-t border-white/[0.04] pt-4">
-
-          <p className="text-[8px] text-gray-600">
-            © {new Date().getFullYear()}
-          </p>
-
-          <p className="text-[8px] text-gray-600">
-            AI · Full Stack · Software Engineering
-          </p>
-
-        </div>
-
-      </footer>
 
     </main>
   );

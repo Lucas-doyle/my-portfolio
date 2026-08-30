@@ -1,9 +1,39 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowDown, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/data/projects";
 
+const filterCategories = [
+  { name: "All", filter: "all" },
+  { name: "AI & ML", filter: "ai" },
+  { name: "Full Stack", filter: "fullstack" },
+  { name: "Backend", filter: "backend" },
+  { name: "DevOps", filter: "devops" },
+];
+
+const getCategoryFilter = (category: string): string => {
+  const aiCategories = ["AI / RAG", "AI Agents", "AI / Agents", "AI/SaaS", "AI / Optimization", "AI / Search", "AI / Integration", "AI / LLM", "AI / Document Intelligence"];
+  const fullStackCategories = ["Web Apps", "Full Stack", "Frontend / UX", "Full Stack / SaaS", "Full Stack / AI", "Full Stack / Analytics"];
+  const backendCategories = ["Backend", "Backend / APIs", "Backend / Integration", "Backend / Microservices", "Backend / Data"];
+  const devOpsCategories = ["Cloud / DevOps", "Architecture", "Security / SaaS", "Monitoring / Operations", "Testing / DevOps", "Engineering / Leadership"];
+
+  if (aiCategories.includes(category)) return "ai";
+  if (fullStackCategories.includes(category)) return "fullstack";
+  if (backendCategories.includes(category)) return "backend";
+  if (devOpsCategories.includes(category)) return "devops";
+  return "other";
+};
+
 export default function ProjectsPage() {
+  const [selectedFilter, setSelectedFilter] = useState("all");
+
+  const filteredProjects = selectedFilter === "all"
+    ? projects
+    : projects.filter(project => getCategoryFilter(project.category) === selectedFilter);
+
   return (
     <section className="page">
       <div className="container-page py-16">
@@ -22,28 +52,23 @@ export default function ProjectsPage() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          {[
-            "All",
-            "AI",
-            "Web Apps",
-            "Full Stack",
-            "Tools",
-          ].map((item, index) => (
+          {filterCategories.map((category) => (
             <button
-              key={item}
-              className={`rounded-lg px-4 py-2 text-[10px] ${
-                index === 0
+              key={category.filter}
+              onClick={() => setSelectedFilter(category.filter)}
+              className={`rounded-lg px-4 py-2 text-[10px] transition ${
+                selectedFilter === category.filter
                   ? "bg-violet-600 text-white"
-                  : "border border-white/10 text-gray-500 hover:text-white"
+                  : "border border-white/10 text-gray-500 hover:text-white hover:border-white/20"
               }`}
             >
-              {item}
+              {category.name}
             </button>
           ))}
         </div>
 
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {projects.map((project) => (
+          {filteredProjects.map((project) => (
             <ProjectCard
               key={project.slug}
               project={project}
@@ -51,13 +76,19 @@ export default function ProjectsPage() {
           ))}
         </div>
 
+        {filteredProjects.length === 0 && (
+          <div className="mt-8 text-center text-gray-500 text-sm">
+            No projects found in this category.
+          </div>
+        )}
+
         {/* VIEW ALL */}
         <div className="mt-10 flex justify-center">
           <Link
-            href="/projects"
+            href="/"
             className="flex items-center gap-2 rounded-lg border border-violet-500/30 bg-violet-500/5 px-5 py-3 text-xs font-semibold text-violet-300 transition hover:bg-violet-500/10"
           >
-            View All Projects
+            Back to Home
             <ArrowRight size={14} />
           </Link>
         </div>
