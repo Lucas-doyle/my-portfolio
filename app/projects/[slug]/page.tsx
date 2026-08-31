@@ -62,9 +62,9 @@ export default async function ProjectPage({
             </p>
 
             <div className="mt-6 flex flex-wrap gap-2">
-              {project.technologies.map((technology) => (
+              {project.technologies.map((technology, index) => (
                 <span
-                  key={technology}
+                  key={`${technology}-${index}`}
                   className="rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-[10px] text-gray-400"
                 >
                   {technology}
@@ -105,9 +105,9 @@ export default async function ProjectPage({
             </h2>
 
             <div className="mt-5 space-y-3">
-              {project.features.map((feature) => (
+              {project.features.map((feature, index) => (
                 <div
-                  key={feature}
+                  key={`${feature}-${index}`}
                   className="flex gap-3 text-xs text-gray-500"
                 >
                   <Check
@@ -128,9 +128,9 @@ export default async function ProjectPage({
           </h2>
 
           <div className="mt-5 flex flex-wrap gap-3">
-            {project.technologies.map((technology) => (
+            {project.technologies.map((technology, index) => (
               <div
-                key={technology}
+                key={`${technology}-${index}`}
                 className="rounded-lg border border-white/10 bg-[#0b1123] px-4 py-3 text-xs text-gray-400"
               >
                 {technology}

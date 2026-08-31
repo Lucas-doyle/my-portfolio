@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronUp } from "lucide-react";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/data/projects";
 
@@ -28,11 +28,63 @@ const getCategoryFilter = (category: string): string => {
 };
 
 export default function ProjectsPage() {
-  const [selectedFilter, setSelectedFilter] = useState("all");
+  const [selectedFilter, setSelectedFilter] = useState(() => {
+    // Initialize from sessionStorage if available
+    if (typeof window !== 'undefined') {
+      const savedFilter = sessionStorage.getItem('projectsSelectedFilter');
+      return savedFilter || "all";
+    }
+    return "all";
+  });
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const isInitialMount = useRef(true);
 
   const filteredProjects = selectedFilter === "all"
     ? projects
     : projects.filter(project => getCategoryFilter(project.category) === selectedFilter);
+
+  // Save scroll position and filter before navigation
+  const handleProjectClick = () => {
+    sessionStorage.setItem('projectsScrollPosition', window.scrollY.toString());
+    sessionStorage.setItem('projectsSelectedFilter', selectedFilter);
+  };
+
+  // Restore scroll position on mount
+  useEffect(() => {
+    const savedPosition = sessionStorage.getItem('projectsScrollPosition');
+
+    if (savedPosition) {
+      window.scrollTo(0, parseInt(savedPosition, 10));
+      sessionStorage.removeItem('projectsScrollPosition');
+    }
+
+    // Clear the saved filter after initial restoration
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      sessionStorage.removeItem('projectsSelectedFilter');
+    }
+  }, []);
+
+  // Clear saved filter when user manually changes filter
+  useEffect(() => {
+    if (!isInitialMount.current) {
+      sessionStorage.removeItem('projectsSelectedFilter');
+    }
+  }, [selectedFilter]);
+
+  // Show/hide scroll to top button
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <section className="page">
@@ -69,10 +121,14 @@ export default function ProjectsPage() {
 
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {filteredProjects.map((project) => (
-            <ProjectCard
+            <Link
               key={project.slug}
-              project={project}
-            />
+              href={`/projects/${project.slug}`}
+              onClick={handleProjectClick}
+              className="block"
+            >
+              <ProjectCard project={project} />
+            </Link>
           ))}
         </div>
 
@@ -93,6 +149,17 @@ export default function ProjectsPage() {
           </Link>
         </div>
       </div>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 flex h-12 w-12 items-center justify-center rounded-full bg-violet-600 text-white shadow-lg shadow-violet-600/30 transition hover:bg-violet-500 hover:shadow-violet-500/40"
+          aria-label="Scroll to top"
+        >
+          <ChevronUp size={20} />
+        </button>
+      )}
     </section>
   );
 }

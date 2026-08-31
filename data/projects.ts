@@ -724,7 +724,6 @@ export const projects: Project[] = [
       "Tailwind CSS",
       "HTML5",
       "CSS3",
-      "Tailwind CSS",
     ],
     features: [
       "Responsive interfaces",

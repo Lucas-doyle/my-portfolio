@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { Project } from "@/data/projects";
@@ -9,10 +8,7 @@ export default function ProjectCard({
   project: Project;
 }) {
   return (
-    <Link
-      href={`/projects/${project.slug}`}
-      className="group card overflow-hidden rounded-xl transition duration-300 hover:-translate-y-1 hover:border-violet-500/30"
-    >
+    <div className="group card overflow-hidden rounded-xl transition duration-300 hover:-translate-y-1 hover:border-violet-500/30">
       <div className="relative aspect-[1.55] overflow-hidden">
         <Image
           src={project.image}
@@ -45,9 +41,9 @@ export default function ProjectCard({
         </p>
 
         <div className="mt-4 flex flex-wrap gap-1.5">
-          {project.technologies.slice(0, 4).map((technology) => (
+          {project.technologies.slice(0, 4).map((technology, index) => (
             <span
-              key={technology}
+              key={`${technology}-${index}`}
               className="rounded-md border border-white/10 bg-white/[0.02] px-2 py-1 text-[9px] text-gray-500"
             >
               {technology}
@@ -55,6 +51,6 @@ export default function ProjectCard({
           ))}
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
