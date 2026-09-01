@@ -37,11 +37,15 @@ export default function ProjectsPage() {
     return "all";
   });
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isRestored, setIsRestored] = useState(false);
+  const [showAllProjects, setShowAllProjects] = useState(false);
   const isInitialMount = useRef(true);
 
   const filteredProjects = selectedFilter === "all"
     ? projects
     : projects.filter(project => getCategoryFilter(project.category) === selectedFilter);
+
+  const displayedProjects = showAllProjects ? filteredProjects : filteredProjects.slice(0, 12);
 
   // Save scroll position and filter before navigation
   const handleProjectClick = () => {
@@ -49,12 +53,27 @@ export default function ProjectsPage() {
     sessionStorage.setItem('projectsSelectedFilter', selectedFilter);
   };
 
-  // Restore scroll position on mount
+  // Restore scroll position on mount - do it before first render
   useEffect(() => {
     const savedPosition = sessionStorage.getItem('projectsScrollPosition');
 
     if (savedPosition) {
-      window.scrollTo(0, parseInt(savedPosition, 10));
+      // Force instant scroll without any animation
+      const scrollY = parseInt(savedPosition, 10);
+
+      // Disable smooth scrolling temporarily
+      document.documentElement.style.scrollBehavior = 'auto';
+      document.body.style.scrollBehavior = 'auto';
+
+      // Set scroll position immediately
+      window.scrollTo(0, scrollY);
+
+      // Re-enable smooth scrolling after a brief delay
+      setTimeout(() => {
+        document.documentElement.style.scrollBehavior = '';
+        document.body.style.scrollBehavior = '';
+      }, 0);
+
       sessionStorage.removeItem('projectsScrollPosition');
     }
 
@@ -63,6 +82,9 @@ export default function ProjectsPage() {
       isInitialMount.current = false;
       sessionStorage.removeItem('projectsSelectedFilter');
     }
+
+    // Mark as restored after minimal delay to prevent jump
+    setTimeout(() => setIsRestored(true), 0);
   }, []);
 
   // Clear saved filter when user manually changes filter
@@ -120,7 +142,7 @@ export default function ProjectsPage() {
         </div>
 
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {filteredProjects.map((project) => (
+          {displayedProjects.map((project) => (
             <Link
               key={project.slug}
               href={`/projects/${project.slug}`}
@@ -138,23 +160,25 @@ export default function ProjectsPage() {
           </div>
         )}
 
-        {/* VIEW ALL */}
-        <div className="mt-10 flex justify-center">
-          <Link
-            href="/"
-            className="flex items-center gap-2 rounded-lg border border-violet-500/30 bg-violet-500/5 px-5 py-3 text-xs font-semibold text-violet-300 transition hover:bg-violet-500/10"
-          >
-            Back to Home
-            <ArrowRight size={14} />
-          </Link>
-        </div>
+        {/* VIEW ALL / SHOW LESS */}
+        {filteredProjects.length > 12 && (
+          <div className="mt-10 flex justify-center">
+            <button
+              onClick={() => setShowAllProjects(!showAllProjects)}
+              className="flex items-center gap-2 rounded-lg border border-violet-500/30 bg-violet-500/5 px-5 py-3 text-xs font-semibold text-violet-300 transition hover:bg-violet-500/10"
+            >
+              {showAllProjects ? "Show Less" : "View All Projects"}
+              <ArrowRight size={14} className={showAllProjects ? "rotate-180" : ""} />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Scroll to Top Button */}
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 flex h-12 w-12 items-center justify-center rounded-full bg-violet-600 text-white shadow-lg shadow-violet-600/30 transition hover:bg-violet-500 hover:shadow-violet-500/40"
+          className="fixed bottom-8 right-8 flex h-12 w-12 items-center justify-center rounded-xl border border-violet-500/30 bg-violet-600/10 text-violet-400 shadow-lg shadow-violet-600/20 backdrop-blur-sm transition-all duration-300 hover:bg-violet-600 hover:text-white hover:shadow-violet-600/40 hover:-translate-y-1"
           aria-label="Scroll to top"
         >
           <ChevronUp size={20} />
