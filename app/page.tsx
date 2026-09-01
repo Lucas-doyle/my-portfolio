@@ -6,19 +6,18 @@ import { BriefcaseBusiness, Mail } from "lucide-react";
 import { useState, useEffect } from "react";
 
 function TypingEffect() {
-  const phrases = [
-    "AI Full Stack Developer",
-    "Senior Software Engineer",
-    "Creating AI-Powered Solutions",
-    "Cloud-Native Applications"
-  ];
-  
   const [currentPhrase, setCurrentPhrase] = useState("");
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [typingSpeed, setTypingSpeed] = useState(150);
 
   useEffect(() => {
+    const phrases = [
+      "AI Full Stack Developer",
+      "Senior Software Engineer",
+      "Creating AI-Powered Solutions",
+      "Cloud-Native Applications"
+    ];
     const currentFullPhrase = phrases[phraseIndex];
     
     const timer = setTimeout(() => {
@@ -43,7 +42,7 @@ function TypingEffect() {
     }, typingSpeed);
 
     return () => clearTimeout(timer);
-  }, [currentPhrase, isDeleting, phraseIndex, phrases, typingSpeed]);
+  }, [currentPhrase, isDeleting, phraseIndex, typingSpeed]);
 
   return (
     <h1 className="mt-1 h-[100px] md:h-[120px] text-[48px] font-bold leading-[1.05] tracking-tight md:text-[65px] text-white">

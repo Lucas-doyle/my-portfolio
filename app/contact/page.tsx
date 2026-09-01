@@ -51,7 +51,7 @@ export default function ContactPage() {
         setSubmitStatus('error');
         setErrorMessage(data.error || 'Failed to send message');
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
       setErrorMessage('Network error. Please try again.');
     } finally {
@@ -185,7 +185,7 @@ export default function ContactPage() {
 
               {submitStatus === 'success' && (
                 <div className="mt-4 rounded-lg bg-green-500/10 border border-green-500/20 px-4 py-3 text-xs text-green-400">
-                  Message sent successfully! I'll get back to you soon.
+                  Message sent successfully! I&apos;ll get back to you soon.
                 </div>
               )}
 

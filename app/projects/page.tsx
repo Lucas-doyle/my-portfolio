@@ -37,7 +37,6 @@ export default function ProjectsPage() {
     return "all";
   });
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [isRestored, setIsRestored] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
   const isInitialMount = useRef(true);
 
@@ -82,9 +81,6 @@ export default function ProjectsPage() {
       isInitialMount.current = false;
       sessionStorage.removeItem('projectsSelectedFilter');
     }
-
-    // Mark as restored after minimal delay to prevent jump
-    setTimeout(() => setIsRestored(true), 0);
   }, []);
 
   // Clear saved filter when user manually changes filter
