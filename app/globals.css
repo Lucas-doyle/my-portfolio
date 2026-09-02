@@ -36,8 +36,12 @@ a {
 }
 
 .container-page {
-  width: min(100% - 32px, 1180px);
+  width: min(100% - 32px, 1280px);
   margin-inline: auto;
+}
+
+.homepage-container {
+  width: min(100% - 32px, 1440px);
 }
 
 .page {
@@ -106,6 +110,10 @@ a {
 
 @media (max-width: 768px) {
   .container-page {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .homepage-container {
     width: min(100% - 24px, 1180px);
   }
 }

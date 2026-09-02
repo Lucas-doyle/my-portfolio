@@ -62,7 +62,7 @@ function Stat({
 }) {
   return (
     <div className="text-center">
-      <p className="text-[28px] font-bold text-violet-500">
+      <p className="text-[30px] font-bold text-violet-500">
         {number}
       </p>
 
@@ -85,9 +85,9 @@ export default function AboutPage() {
           ABOUT HERO
           ===================================================== */}
 
-      <section className="container-page py-10">
+      <section className="container-page homepage-container py-12">
 
-        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1fr]">
+        <div className="grid items-center gap-6 lg:grid-cols-[0.85fr_1.15fr]">
 
 
           {/* =================================================
@@ -303,15 +303,15 @@ export default function AboutPage() {
 
             {/* Image container */}
 
-            <div className="card relative mx-auto max-w-[530px] overflow-hidden rounded-xl">
+            <div className="card relative mx-auto max-w-[1100px] overflow-hidden rounded-3xl">
 
               <Image
                 src="/images/about-developer.png"
                 alt="AI Full Stack Software Engineer"
-                width={900}
-                height={900}
+                width={1672}
+                height={941}
                 priority
-                className="h-[420px] w-full object-cover"
+                className="h-auto w-full object-contain"
               />
 
               {/* Dark gradient */}
@@ -410,9 +410,9 @@ export default function AboutPage() {
           STATISTICS
           ===================================================== */}
 
-      <section className="container-page pb-10">
+      <section className="container-page homepage-container pb-10">
 
-        <div className="card grid grid-cols-2 rounded-xl px-6 py-6 md:grid-cols-4">
+        <div className="card grid grid-cols-2 rounded-3xl px-6 py-7 md:grid-cols-4">
 
           <Stat
             number="20+"
@@ -443,14 +443,14 @@ export default function AboutPage() {
           EDUCATION / CAREER
           ===================================================== */}
 
-      <section className="container-page pb-12">
+      <section className="container-page homepage-container pb-12">
 
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2">
 
 
           {/* Education */}
 
-          <div className="card rounded-xl p-6">
+          <div className="card rounded-3xl p-6">
 
             <p className="text-[10px] font-medium text-violet-400">
               Education
@@ -462,6 +462,13 @@ export default function AboutPage() {
 
             <p className="mt-1 text-[11px] text-gray-400">
               BSc in Computer Science
+            </p>
+
+            <p className="mt-4 text-[12px] leading-6 text-gray-500">
+              University College Dublin is a leading research university in
+              Ireland. During my BSc, I built a strong foundation in software
+              engineering, algorithms, and systems design, while learning to
+              turn complex problems into practical solutions.
             </p>
 
             <div className="mt-5 flex justify-between">
@@ -493,7 +500,7 @@ export default function AboutPage() {
 
           {/* Current role */}
 
-          <div className="card rounded-xl p-6">
+          <div className="card rounded-3xl p-6">
 
             <p className="text-[10px] font-medium text-violet-400">
               Current Role
@@ -507,10 +514,13 @@ export default function AboutPage() {
               Tines · Dublin, Ireland
             </p>
 
-            <p className="mt-4 text-[10px] leading-5 text-gray-500">
-              Building production AI applications, RAG systems,
-              multi-agent workflows, scalable APIs, and AI-powered
-              user experiences serving thousands of users.
+            <p className="mt-4 max-w-[800px] text-[12px] leading-6 text-gray-500">
+              Designing and deploying production AI applications with OpenAI,
+              FastAPI, Next.js, and TypeScript for 10,000+ monthly users.
+              Building enterprise RAG systems and multi-agent workflows with
+              LangChain, LangGraph, OpenAI embeddings, and Pinecone, while
+              developing scalable APIs and optimizing AI inference through
+              caching, prompt engineering, and response streaming.
             </p>
 
           </div>

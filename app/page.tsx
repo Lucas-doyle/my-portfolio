@@ -69,15 +69,15 @@ function SmallIcon({
 
 function DeveloperLaptop() {
   return (
-    <div className="relative mx-auto h-[550px] w-full max-w-[670px]">
+    <div className="relative mx-auto h-[500px] w-full max-w-[1100px]">
       {/* Glow effect background */}
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-600/20 via-purple-500/10 to-transparent blur-3xl" />
-      
+
       {/* Subtle gradient overlay */}
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-violet-900/10 to-transparent" />
-      
+
       {/* Image with subtle border and shadow */}
-      <div className="relative h-full w-full rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm shadow-2xl shadow-violet-500/10">
+      <div className="relative h-full w-full rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm shadow-2xl shadow-violet-500/10 overflow-hidden">
         <Image
           src="/images/laptop-dev.png"
           alt="Developer laptop setup with code, plant, and coffee"
@@ -109,12 +109,12 @@ function StatCard({
   label: string;
 }) {
   return (
-    <div className="flex h-[104px] items-center gap-4 rounded-2xl border border-white/[0.08] bg-[#0c1220] px-6">
+    <div className="flex h-[76px] items-center gap-3 rounded-xl border border-white/[0.1] bg-gradient-to-br from-[#121a30]/95 to-[#0c1220]/95 px-3.5 shadow-xl shadow-black/25 backdrop-blur-md">
       <SmallIcon>{icon}</SmallIcon>
 
       <div>
-        <p className="text-xl font-bold text-white">{number}</p>
-        <p className="text-[10px] text-gray-400">{label}</p>
+        <p className="text-xl font-bold leading-none text-white">{number}</p>
+        <p className="text-[9px] text-gray-400">{label}</p>
       </div>
     </div>
   );
@@ -142,11 +142,11 @@ function FeatureCard({
         </div>
       </div>
 
-      <h3 className="mt-4 text-[14px] font-semibold text-white">
+      <h3 className="mt-4 text-[15px] font-semibold text-white">
         {title}
       </h3>
 
-      <p className="mt-2 text-[12px] leading-5 text-gray-400">
+      <p className="mt-2 text-[13px] leading-6 text-gray-400">
         {description}
       </p>
     </div>
@@ -164,8 +164,8 @@ export default function HomePage() {
           HERO
       ===================================================== */}
 
-      <section className="container-page py-12">
-        <div className="grid items-center gap-6 lg:grid-cols-[1fr_1fr]">
+      <section className="container-page homepage-container py-12">
+        <div className="grid items-center gap-6 lg:grid-cols-[0.85fr_1.15fr]">
           {/* LEFT SIDE */}
           <div className="relative z-10">
             <TypingEffect />
@@ -217,7 +217,7 @@ export default function HomePage() {
             <DeveloperLaptop />
 
             {/* Statistics */}
-            <div className="absolute right-[-10px] top-[52%] hidden w-[220px] -translate-y-1/2 space-y-5 xl:block">
+            <div className="absolute right-[-104px] top-[52%] z-10 hidden w-[210px] -translate-y-1/2 space-y-4 xl:block">
               <StatCard
                 number="7+"
                 label="Years Experience"
@@ -292,22 +292,22 @@ export default function HomePage() {
           ABOUT PREVIEW
       ===================================================== */}
 
-      <section className="container-page pb-8">
-        <div className="card rounded-xl px-5 py-5 md:px-6">
-          <div className="grid gap-3 lg:grid-cols-[1.4fr_0.9fr_0.9fr_0.9fr]">
+      <section className="container-page homepage-container pb-8">
+        <div className="card rounded-3xl px-6 py-7 md:px-8">
+          <div className="grid gap-6 lg:grid-cols-[1.4fr_0.9fr_0.9fr_0.9fr]">
             {/* About text */}
             <div>
-              <p className="text-[12px] font-medium text-violet-400">
+              <p className="text-[13px] font-medium text-violet-400">
                 About Me
               </p>
 
-              <h2 className="mt-2 text-[22px] font-bold leading-tight text-white">
+              <h2 className="mt-2 text-[24px] font-bold leading-tight text-white">
                 Building AI-Powered Solutions
                 <br />
                 That Make an Impact
               </h2>
 
-              <p className="mt-3 max-w-[380px] text-[12px] leading-6 text-gray-500">
+              <p className="mt-3 max-w-[400px] text-[13px] leading-6 text-gray-500">
                 I&apos;m an AI Full Stack Software Engineer with 7 years
                 of experience designing and developing modern web and
                 AI applications. I turn complex ideas into scalable
