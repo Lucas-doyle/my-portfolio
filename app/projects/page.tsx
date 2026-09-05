@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import Link from "next/link";
 import { ArrowRight, ChevronUp } from "lucide-react";
 import ProjectCard from "@/components/ProjectCard";
@@ -28,17 +28,9 @@ const getCategoryFilter = (category: string): string => {
 };
 
 export default function ProjectsPage() {
-  const [selectedFilter, setSelectedFilter] = useState(() => {
-    // Initialize from sessionStorage if available
-    if (typeof window !== 'undefined') {
-      const savedFilter = sessionStorage.getItem('projectsSelectedFilter');
-      return savedFilter || "all";
-    }
-    return "all";
-  });
+  const [selectedFilter, setSelectedFilter] = useState("all");
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
-  const isInitialMount = useRef(true);
 
   const filteredProjects = selectedFilter === "all"
     ? projects
@@ -46,49 +38,49 @@ export default function ProjectsPage() {
 
   const displayedProjects = showAllProjects ? filteredProjects : filteredProjects.slice(0, 12);
 
-  // Save scroll position and filter before navigation
-  const handleProjectClick = () => {
-    sessionStorage.setItem('projectsScrollPosition', window.scrollY.toString());
-    sessionStorage.setItem('projectsSelectedFilter', selectedFilter);
+  const persistListState = (filter: string, showAll: boolean) => {
+    sessionStorage.setItem("projectsSelectedFilter", filter);
+    sessionStorage.setItem("projectsShowAll", String(showAll));
   };
 
-  // Restore scroll position on mount - do it before first render
-  useEffect(() => {
-    const savedPosition = sessionStorage.getItem('projectsScrollPosition');
+  const handleProjectClick = () => {
+    sessionStorage.setItem("projectsScrollPosition", window.scrollY.toString());
+    persistListState(selectedFilter, showAllProjects);
+  };
 
+  // Restore expanded list and filter before paint, then scroll.
+  useLayoutEffect(() => {
+    const savedFilter = sessionStorage.getItem("projectsSelectedFilter");
+    const shouldShowAll = sessionStorage.getItem("projectsShowAll") === "true";
+    let waitingForLayout = false;
+
+    if (savedFilter && savedFilter !== selectedFilter) {
+      setSelectedFilter(savedFilter);
+      waitingForLayout = true;
+    }
+
+    if (shouldShowAll && !showAllProjects) {
+      setShowAllProjects(true);
+      waitingForLayout = true;
+    }
+
+    if (waitingForLayout) {
+      return;
+    }
+
+    const savedPosition = sessionStorage.getItem("projectsScrollPosition");
     if (savedPosition) {
-      // Force instant scroll without any animation
       const scrollY = parseInt(savedPosition, 10);
 
-      // Disable smooth scrolling temporarily
-      document.documentElement.style.scrollBehavior = 'auto';
-      document.body.style.scrollBehavior = 'auto';
-
-      // Set scroll position immediately
+      document.documentElement.style.scrollBehavior = "auto";
+      document.body.style.scrollBehavior = "auto";
       window.scrollTo(0, scrollY);
+      document.documentElement.style.scrollBehavior = "";
+      document.body.style.scrollBehavior = "";
 
-      // Re-enable smooth scrolling after a brief delay
-      setTimeout(() => {
-        document.documentElement.style.scrollBehavior = '';
-        document.body.style.scrollBehavior = '';
-      }, 0);
-
-      sessionStorage.removeItem('projectsScrollPosition');
+      sessionStorage.removeItem("projectsScrollPosition");
     }
-
-    // Clear the saved filter after initial restoration
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      sessionStorage.removeItem('projectsSelectedFilter');
-    }
-  }, []);
-
-  // Clear saved filter when user manually changes filter
-  useEffect(() => {
-    if (!isInitialMount.current) {
-      sessionStorage.removeItem('projectsSelectedFilter');
-    }
-  }, [selectedFilter]);
+  }, [showAllProjects, selectedFilter]);
 
   // Show/hide scroll to top button
   useEffect(() => {
@@ -125,7 +117,10 @@ export default function ProjectsPage() {
           {filterCategories.map((category) => (
             <button
               key={category.filter}
-              onClick={() => setSelectedFilter(category.filter)}
+              onClick={() => {
+                setSelectedFilter(category.filter);
+                persistListState(category.filter, showAllProjects);
+              }}
               className={`rounded-lg px-4 py-2 text-[10px] transition ${
                 selectedFilter === category.filter
                   ? "bg-violet-600 text-white"
@@ -160,7 +155,11 @@ export default function ProjectsPage() {
         {filteredProjects.length > 12 && (
           <div className="mt-10 flex justify-center">
             <button
-              onClick={() => setShowAllProjects(!showAllProjects)}
+              onClick={() => {
+                const next = !showAllProjects;
+                setShowAllProjects(next);
+                persistListState(selectedFilter, next);
+              }}
               className="flex items-center gap-2 rounded-lg border border-violet-500/30 bg-violet-500/5 px-5 py-3 text-xs font-semibold text-violet-300 transition hover:bg-violet-500/10"
             >
               {showAllProjects ? "Show Less" : "View All Projects"}

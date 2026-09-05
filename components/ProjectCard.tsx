@@ -14,7 +14,7 @@ export default function ProjectCard({
           src={project.image}
           alt={project.title}
           fill
-          className="object-center transition duration-500 group-hover:scale-105"
+          className="object-cover object-center transition duration-500 group-hover:scale-105"
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-transparent to-transparent" />
