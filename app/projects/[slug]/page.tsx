@@ -44,6 +44,7 @@ export default async function ProjectPage({
         <div className="container-page py-16">
           <Link
             href="/projects"
+            scroll={false}
             className="mb-8 inline-flex items-center gap-2 text-xs text-gray-500 hover:text-white"
           >
             <ArrowLeft size={14} />

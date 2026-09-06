@@ -1,10 +1,70 @@
 "use client";
 
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { ArrowRight, ChevronUp } from "lucide-react";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/data/projects";
+
+const FILTER_KEY = "projectsSelectedFilter";
+const SHOW_ALL_KEY = "projectsShowAll";
+const SCROLL_KEY = "projectsScrollPosition";
+const SLUG_KEY = "projectsScrollSlug";
+
+const listStateListeners = new Set<() => void>();
+
+function subscribeListState(onStoreChange: () => void) {
+  listStateListeners.add(onStoreChange);
+  return () => {
+    listStateListeners.delete(onStoreChange);
+  };
+}
+
+function persistListState(filter: string, showAll: boolean) {
+  sessionStorage.setItem(FILTER_KEY, filter);
+  sessionStorage.setItem(SHOW_ALL_KEY, String(showAll));
+  listStateListeners.forEach((listener) => listener());
+}
+
+function getStoredFilter() {
+  return sessionStorage.getItem(FILTER_KEY) ?? "all";
+}
+
+function getStoredShowAll() {
+  return sessionStorage.getItem(SHOW_ALL_KEY) === "true";
+}
+
+function clearScrollRestore() {
+  sessionStorage.removeItem(SCROLL_KEY);
+  sessionStorage.removeItem(SLUG_KEY);
+}
+
+function restoreProjectsViewport() {
+  const slug = sessionStorage.getItem(SLUG_KEY);
+  const savedPosition = sessionStorage.getItem(SCROLL_KEY);
+  const target = slug
+    ? document.getElementById(`project-${slug}`)
+    : null;
+
+  const html = document.documentElement;
+  const body = document.body;
+  html.style.scrollBehavior = "auto";
+  body.style.scrollBehavior = "auto";
+
+  if (target) {
+    target.scrollIntoView({ block: "center", behavior: "auto" });
+  } else if (savedPosition) {
+    const scrollY = parseInt(savedPosition, 10);
+    if (!Number.isNaN(scrollY)) {
+      window.scrollTo({ top: scrollY, behavior: "auto" });
+    }
+  }
+
+  html.style.scrollBehavior = "";
+  body.style.scrollBehavior = "";
+
+  return Boolean(target) || savedPosition !== null;
+}
 
 const filterCategories = [
   { name: "All", filter: "all" },
@@ -28,9 +88,17 @@ const getCategoryFilter = (category: string): string => {
 };
 
 export default function ProjectsPage() {
-  const [selectedFilter, setSelectedFilter] = useState("all");
+  const selectedFilter = useSyncExternalStore(
+    subscribeListState,
+    getStoredFilter,
+    () => "all",
+  );
+  const showAllProjects = useSyncExternalStore(
+    subscribeListState,
+    getStoredShowAll,
+    () => false,
+  );
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [showAllProjects, setShowAllProjects] = useState(false);
 
   const filteredProjects = selectedFilter === "all"
     ? projects
@@ -38,48 +106,69 @@ export default function ProjectsPage() {
 
   const displayedProjects = showAllProjects ? filteredProjects : filteredProjects.slice(0, 12);
 
-  const persistListState = (filter: string, showAll: boolean) => {
-    sessionStorage.setItem("projectsSelectedFilter", filter);
-    sessionStorage.setItem("projectsShowAll", String(showAll));
-  };
-
-  const handleProjectClick = () => {
-    sessionStorage.setItem("projectsScrollPosition", window.scrollY.toString());
+  const handleProjectClick = (slug: string) => {
+    sessionStorage.setItem(SCROLL_KEY, window.scrollY.toString());
+    sessionStorage.setItem(SLUG_KEY, slug);
     persistListState(selectedFilter, showAllProjects);
   };
 
-  // Restore expanded list and filter before paint, then scroll.
-  useLayoutEffect(() => {
-    const savedFilter = sessionStorage.getItem("projectsSelectedFilter");
-    const shouldShowAll = sessionStorage.getItem("projectsShowAll") === "true";
-    let waitingForLayout = false;
+  // Restore list position after Next.js resets scroll on navigation.
+  useEffect(() => {
+    const hasRestore =
+      sessionStorage.getItem(SCROLL_KEY) !== null ||
+      sessionStorage.getItem(SLUG_KEY) !== null;
 
-    if (savedFilter && savedFilter !== selectedFilter) {
-      setSelectedFilter(savedFilter);
-      waitingForLayout = true;
-    }
-
-    if (shouldShowAll && !showAllProjects) {
-      setShowAllProjects(true);
-      waitingForLayout = true;
-    }
-
-    if (waitingForLayout) {
+    if (!hasRestore) {
       return;
     }
 
-    const savedPosition = sessionStorage.getItem("projectsScrollPosition");
-    if (savedPosition) {
-      const scrollY = parseInt(savedPosition, 10);
-
-      document.documentElement.style.scrollBehavior = "auto";
-      document.body.style.scrollBehavior = "auto";
-      window.scrollTo(0, scrollY);
-      document.documentElement.style.scrollBehavior = "";
-      document.body.style.scrollBehavior = "";
-
-      sessionStorage.removeItem("projectsScrollPosition");
+    if (
+      getStoredFilter() !== selectedFilter ||
+      getStoredShowAll() !== showAllProjects
+    ) {
+      return;
     }
+
+    const previousRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+
+    let cancelled = false;
+    let attempts = 0;
+    let retryTimer = 0;
+
+    const tryRestore = () => {
+      if (cancelled) {
+        return;
+      }
+
+      const slug = sessionStorage.getItem(SLUG_KEY);
+      const targetReady = !slug || Boolean(document.getElementById(`project-${slug}`));
+
+      if (targetReady && restoreProjectsViewport()) {
+        clearScrollRestore();
+        return;
+      }
+
+      attempts += 1;
+      if (attempts < 30) {
+        retryTimer = window.setTimeout(tryRestore, 50);
+        return;
+      }
+
+      restoreProjectsViewport();
+      clearScrollRestore();
+    };
+
+    const frame = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(tryRestore);
+    });
+
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(retryTimer);
+      window.history.scrollRestoration = previousRestoration;
+    };
   }, [showAllProjects, selectedFilter]);
 
   // Show/hide scroll to top button
@@ -118,7 +207,6 @@ export default function ProjectsPage() {
             <button
               key={category.filter}
               onClick={() => {
-                setSelectedFilter(category.filter);
                 persistListState(category.filter, showAllProjects);
               }}
               className={`rounded-lg px-4 py-2 text-[10px] transition ${
@@ -135,9 +223,10 @@ export default function ProjectsPage() {
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {displayedProjects.map((project) => (
             <Link
+              id={`project-${project.slug}`}
               key={project.slug}
               href={`/projects/${project.slug}`}
-              onClick={handleProjectClick}
+              onClick={() => handleProjectClick(project.slug)}
               className="block"
             >
               <ProjectCard project={project} />
@@ -156,9 +245,7 @@ export default function ProjectsPage() {
           <div className="mt-10 flex justify-center">
             <button
               onClick={() => {
-                const next = !showAllProjects;
-                setShowAllProjects(next);
-                persistListState(selectedFilter, next);
+                persistListState(selectedFilter, !showAllProjects);
               }}
               className="flex items-center gap-2 rounded-lg border border-violet-500/30 bg-violet-500/5 px-5 py-3 text-xs font-semibold text-violet-300 transition hover:bg-violet-500/10"
             >
