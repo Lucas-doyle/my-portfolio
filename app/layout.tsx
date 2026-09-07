@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
 
 export const metadata: Metadata = {
   title: "AI Full Stack Software Engineer",
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en" data-scroll-behavior="smooth">
       <body>
         <Navbar />
+        <CustomCursor />
 
         <main>{children}</main>
 

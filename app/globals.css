@@ -31,6 +31,18 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+@media (pointer: fine) {
+  html,
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    cursor: none;
+  }
+}
+
 ::selection {
   background: rgba(124, 58, 237, 0.4);
 }
@@ -131,4 +143,155 @@ a {
 
 .animate-fade-in {
   animation: fade-in 1s ease-out forwards;
+}
+
+.quantum-cursor,
+.quantum-trail,
+.quantum-particle,
+.quantum-spark,
+.quantum-ring-burst {
+  position: fixed;
+  pointer-events: none;
+}
+
+.quantum-cursor {
+  z-index: 9999;
+  left: -100px;
+  top: -100px;
+  width: 18px;
+  height: 18px;
+  transform: translate3d(-50%, -50%, 0) rotate(var(--cursor-angle, 0deg)) scale(var(--cursor-scale, 1));
+  transition: filter 140ms ease, transform 90ms linear;
+  will-change: left, top, transform;
+}
+
+.quantum-cursor-core {
+  position: absolute;
+  inset: 0;
+  border: 1px solid #b36cff;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 34%, #ffffff 0 8%, #d5b4ff 18%, #8b45ff 58%, transparent 72%);
+  box-shadow: 0 0 8px #9b4dff, 0 0 28px rgba(139, 69, 255, 0.65), 0 0 42px rgba(57, 200, 255, 0.28);
+  transition: transform 120ms ease, filter 120ms ease;
+}
+
+.quantum-cursor::before,
+.quantum-cursor::after {
+  position: absolute;
+  inset: -5px;
+  border: 1px solid rgba(139, 69, 255, 0.42);
+  border-radius: 50%;
+  content: "";
+  animation: quantum-orbit 2.6s linear infinite;
+}
+
+.quantum-cursor::after {
+  inset: -9px;
+  border-color: rgba(57, 200, 255, 0.25);
+  border-left-color: transparent;
+  animation-direction: reverse;
+  animation-duration: 1.8s;
+}
+
+.quantum-cursor.is-moving .quantum-cursor-core {
+  filter: brightness(1.45);
+}
+
+.quantum-cursor.is-interactive .quantum-cursor-core {
+  transform: scale(1.35);
+  box-shadow: 0 0 12px #9b4dff, 0 0 34px rgba(139, 69, 255, 0.85), 0 0 52px rgba(57, 200, 255, 0.4);
+}
+
+.quantum-cursor.is-pressed .quantum-cursor-core {
+  transform: scale(0.72);
+  filter: brightness(2.2);
+}
+
+.quantum-trail {
+  z-index: 9998;
+  width: 5px;
+  height: 5px;
+  margin: -2.5px;
+  border-radius: 50%;
+  background: #a35cff;
+  box-shadow: 0 0 9px #a35cff, 0 0 16px rgba(57, 200, 255, 0.55);
+  opacity: 0.55;
+  transform: scale(var(--trail-scale, 1));
+  transition: opacity 380ms ease-out, transform 380ms ease-out;
+}
+
+.quantum-trail.is-fading {
+  opacity: 0;
+  transform: scale(0.15);
+}
+
+.quantum-particle,
+.quantum-spark,
+.quantum-ring-burst {
+  z-index: 9997;
+}
+
+.quantum-particle {
+  width: 5px;
+  height: 5px;
+  margin: -2.5px;
+  border: 1px solid #a864ff;
+  border-radius: 50%;
+  animation: quantum-burst 650ms cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+}
+
+.quantum-spark {
+  width: 2px;
+  height: 14px;
+  margin: -7px -1px;
+  background: #6be4ff;
+  box-shadow: 0 0 8px #6be4ff;
+  animation: quantum-spark 550ms ease-out forwards;
+}
+
+.quantum-ring-burst {
+  width: 12px;
+  height: 12px;
+  margin: -6px;
+  border: 1px solid #8b45ff;
+  border-radius: 50%;
+  animation: quantum-ring 580ms ease-out forwards;
+}
+
+@keyframes quantum-orbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes quantum-burst {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(0.3); }
+  100% { opacity: 0; transform: translate(var(--particle-x), var(--particle-y)) scale(1.8); }
+}
+
+@keyframes quantum-spark {
+  to { opacity: 0; transform: translate(var(--particle-x), var(--particle-y)) rotate(120deg); }
+}
+
+@keyframes quantum-ring {
+  0% { opacity: 1; transform: scale(0.2); }
+  100% { opacity: 0; transform: scale(5); }
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .quantum-cursor,
+  .quantum-trail,
+  .quantum-particle,
+  .quantum-spark,
+  .quantum-ring-burst {
+    display: none;
+  }
+
+  html,
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    cursor: auto;
+  }
 }
