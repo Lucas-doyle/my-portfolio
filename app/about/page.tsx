@@ -79,7 +79,7 @@ function Stat({
 
 export default function AboutPage() {
   return (
-    <main className="page">
+    <div className="page">
 
       {/* =====================================================
           ABOUT HERO
@@ -529,6 +529,6 @@ export default function AboutPage() {
 
       </section>
 
-    </main>
+    </div>
   );
 }

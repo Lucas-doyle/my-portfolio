@@ -1,7 +1,4 @@
-import {
-  Link as LinkIcon,
-  Mail,
-} from "lucide-react";
+import { Mail } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
 export default function Footer() {
@@ -18,28 +15,20 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <a
               href="mailto:bruno.silva.94410@gmail.com"
-              target="_blank"
-              rel="noopener norefeerer"
+              aria-label="Email"
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-400 transition hover:border-violet-500/40 hover:text-violet-400"
             >
               <Mail size={15} />
             </a>
 
             <a
-              href="https://github.com/Lucas-doyle/my-portfolio"
+              href="https://github.com/Lucas-doyle"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-400 transition hover:border-violet-500/40 hover:text-violet-400"
             >
               <FaGithub size={15} />
-            </a>
-
-            <a
-              href="#"
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-400 transition hover:border-violet-500/40 hover:text-violet-400"
-            >
-              <LinkIcon size={15} />
             </a>
           </div>
         </div>

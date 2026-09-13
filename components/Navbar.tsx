@@ -72,7 +72,11 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <button
+            type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
             className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-300 lg:hidden"
           >
             {mobileOpen ? (
@@ -84,22 +88,24 @@ export default function Navbar() {
         </div>
       </div>
 
-      {mobileOpen && (
-        <div className="border-t border-white/[0.06] bg-[#050816] px-5 py-5 lg:hidden">
-          <div className="container-page flex flex-col gap-4">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="text-sm text-gray-300"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
+      <div
+        id="mobile-navigation"
+        hidden={!mobileOpen}
+        className="border-t border-white/[0.06] bg-[#050816] px-5 py-5 lg:hidden"
+      >
+        <div className="container-page flex flex-col gap-4">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setMobileOpen(false)}
+              className="text-sm text-gray-300"
+            >
+              {link.name}
+            </Link>
+          ))}
         </div>
-      )}
+      </div>
     </header>
   );
 }

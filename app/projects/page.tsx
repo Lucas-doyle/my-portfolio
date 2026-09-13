@@ -197,7 +197,7 @@ export default function ProjectsPage() {
         </h1>
 
         <p className="section-description">
-          Things I&apos; ve built with passion and purpose, ranging from
+          Things I&apos;ve built with passion and purpose, ranging from
           Generative AI systems to scalable SaaS platforms and
           full-stack applications.
         </p>
