@@ -1,6 +1,8 @@
 # Email Configuration
 
-This project uses Resend for email delivery. To enable email functionality:
+This project uses Resend for email delivery. The contact API fails closed:
+it returns HTTP 503 unless both `RESEND_API_KEY` and `EMAIL_TO` are set.
+Missing config is never treated as a successful send.
 
 ## Setup Steps
 
@@ -12,6 +14,7 @@ This project uses Resend for email delivery. To enable email functionality:
    EMAIL_FROM=onboarding@resend.dev
    EMAIL_TO=bruno.silva.94410@gmail.com
    ```
+4. Restart the Next.js dev server so it picks up the new variables
 
 ## Getting Started with Resend
 
@@ -19,14 +22,25 @@ This project uses Resend for email delivery. To enable email functionality:
 2. Navigate to API Keys in the dashboard
 3. Create a new API key
 4. For testing, you can use the default `onboarding@resend.dev` sender
-5. For production, verify your own domain in Resend
+5. Until you verify your own domain, Resend only delivers to the email
+   on your Resend account
+6. For production, verify your own domain in Resend and set `EMAIL_FROM`
+   to an address on that domain
 
 ## Environment Variables
 
-- `RESEND_API_KEY`: Your Resend API key
-- `EMAIL_FROM`: Sender email (use onboarding@resend.dev for testing)
-- `EMAIL_TO`: Destination email (bruno.silva.94410@gmail.com)
+- `RESEND_API_KEY` (required): Your Resend API key
+- `EMAIL_TO` (required): Inbox that should receive portfolio messages
+- `EMAIL_FROM` (optional): Sender address. Defaults to
+  `onboarding@resend.dev` for testing
+
+## Abuse protection
+
+- Repeat posts from the same IP are limited to 5 every 10 minutes (HTTP 429)
+- The form includes a hidden honeypot field. Filled honeypots get HTTP 200
+  and no email is sent
 
 ## Important
 
-The `.env.local` file is already in `.gitignore` for security. Never commit your API keys!
+The `.env.local` file is already in `.gitignore` for security. Never commit
+your API keys.

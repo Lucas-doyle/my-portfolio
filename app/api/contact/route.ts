@@ -1,17 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { escapeHtml } from "@/lib/html";
+import { getClientIp, rateLimit } from "@/lib/rate-limit";
 
 interface ContactFormData {
   name: string;
   email: string;
   subject: string;
   message: string;
+  website?: string;
+}
+
+function isHoneypotFilled(value: unknown): boolean {
+  return typeof value === "string" && value.trim().length > 0;
 }
 
 export async function POST(request: NextRequest) {
   try {
+    const limited = rateLimit(getClientIp(request));
+    if (!limited.ok) {
+      return NextResponse.json(
+        { error: "Too many messages. Please wait a few minutes and try again." },
+        {
+          status: 429,
+          headers: { "Retry-After": String(limited.retryAfterSec) },
+        },
+      );
+    }
+
     const body: ContactFormData = await request.json();
+
+    if (isHoneypotFilled(body.website)) {
+      return NextResponse.json(
+        { message: "Contact form submitted successfully" },
+        { status: 200 },
+      );
+    }
 
     if (!body.name || !body.email || !body.subject || !body.message) {
       return NextResponse.json(

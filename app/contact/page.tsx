@@ -15,6 +15,7 @@ export default function ContactPage() {
     email: '',
     subject: '',
     message: '',
+    website: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -46,10 +47,20 @@ export default function ContactPage() {
 
       if (response.ok) {
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        setFormData({ name: '', email: '', subject: '', message: '', website: '' });
       } else {
         setSubmitStatus('error');
-        setErrorMessage(data.error || 'Failed to send message');
+        if (response.status === 503) {
+          setErrorMessage(
+            'Email is not set up yet. Please use the address on the left, or try again later.',
+          );
+        } else if (response.status === 429) {
+          setErrorMessage(
+            'Too many messages. Please wait a few minutes and try again.',
+          );
+        } else {
+          setErrorMessage(data.error || 'Failed to send message');
+        }
       }
     } catch {
       setSubmitStatus('error');
@@ -142,7 +153,20 @@ export default function ContactPage() {
             </div>
 
             {/* FORM */}
-            <form onSubmit={handleSubmit} className="card rounded-xl p-6 md:p-8">
+            <form onSubmit={handleSubmit} className="relative card rounded-xl p-6 md:p-8">
+              <div className="sr-only" aria-hidden="true">
+                <label htmlFor="contact-website">Website</label>
+                <input
+                  id="contact-website"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={formData.website}
+                  onChange={handleChange}
+                />
+              </div>
+
               <div className="grid gap-4 sm:grid-cols-2">
                 <input
                   name="name"
