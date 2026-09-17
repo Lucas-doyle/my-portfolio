@@ -7,6 +7,8 @@ export type Project = {
   image: string;
   technologies: string[];
   features: string[];
+  demoUrl?: string;
+  repoUrl?: string;
 };
 
 export const projects: Project[] = [

@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import {
   ArrowLeft,
   Check,
   ExternalLink,
 } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import { projects } from "@/data/projects";
 import ScrollToTop from "@/components/ScrollToTop";
 
@@ -26,15 +28,7 @@ export default async function ProjectPage({
   );
 
   if (!project) {
-    return (
-      <section className="page">
-        <div className="container-page py-16">
-          <h1 className="text-3xl font-bold text-white">
-            Project not found
-          </h1>
-        </div>
-      </section>
-    );
+    notFound();
   }
 
   return (
@@ -76,10 +70,33 @@ export default async function ProjectPage({
                 ))}
               </div>
 
-              <button className="mt-7 flex items-center gap-2 rounded-lg bg-violet-600 px-5 py-3 text-xs font-semibold text-white">
-                <ExternalLink size={13} />
-                View Demo
-              </button>
+              {(project.demoUrl || project.repoUrl) && (
+                <div className="mt-7 flex flex-wrap gap-3">
+                  {project.demoUrl && (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-lg bg-violet-600 px-5 py-3 text-xs font-semibold text-white transition hover:bg-violet-500"
+                    >
+                      <ExternalLink size={13} />
+                      View Demo
+                    </a>
+                  )}
+
+                  {project.repoUrl && (
+                    <a
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-5 py-3 text-xs font-semibold text-white transition hover:bg-white/5"
+                    >
+                      <FaGithub size={13} />
+                      View Code
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="relative aspect-video overflow-hidden rounded-xl border border-white/10 bg-[#0b1123]">
