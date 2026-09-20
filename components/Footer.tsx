@@ -1,5 +1,6 @@
 import { Mail } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
+import { site, siteLinks } from "@/data/site";
 
 export default function Footer() {
   return (
@@ -8,13 +9,13 @@ export default function Footer() {
         <div className="flex flex-col justify-between gap-7 md:flex-row md:items-center">
           <div>
             <p className="text-xs text-gray-500">
-              AI Full Stack Software Engineer
+              {site.role}
             </p>
           </div>
 
           <div className="flex items-center gap-3">
             <a
-              href="mailto:bruno.silva.94410@gmail.com"
+              href={siteLinks.email}
               aria-label="Email"
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-400 transition hover:border-violet-500/40 hover:text-violet-400"
             >
@@ -22,7 +23,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="https://github.com/Lucas-doyle"
+              href={siteLinks.github}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"

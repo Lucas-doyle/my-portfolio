@@ -8,6 +8,7 @@ import {
   Globe,
 } from "lucide-react";
 import { useState } from "react";
+import { site, siteLinks } from "@/data/site";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -95,51 +96,51 @@ export default function ContactPage() {
                   <ContactItem
                     icon={<Mail size={16} />}
                     title="Email"
-                    value="bruno.silva.94410@gmail.com"
+                    value={site.email}
                   />
 
                 <ContactItem
                   icon={<Phone size={16} />}
                   title="Phone"
-                  value="+353 86 274 5183"
+                  value={site.phone}
                 />
 
                 <ContactItem
                   icon={<MapPin size={16} />}
                   title="Location"
-                  value="Dublin, Ireland"
+                  value={site.location}
                 />
 
                 <ContactItem
                   icon={<Globe size={16} />}
                   title="Availability"
-                  value="Open for new opportunities"
+                  value={site.availability}
                 />
               </div>
 
               <div className="mt-8 flex gap-2">
                 <a
-                  href="mailto:bruno.silva.94410@gmail.com"
+                  href={siteLinks.email}
                   className="group relative flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-500 hover:border-violet-500/30 hover:text-violet-400"
                 >
                   <Mail size={15} />
                   <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[12px] text-white opacity-0 transition group-hover:opacity-100">
-                    bruno.silva.94410@gmail.com
+                    {site.email}
                   </span>
                 </a>
 
                 <a
-                  href="tel:+353862745183"
+                  href={siteLinks.phone}
                   className="group relative flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-500 hover:border-violet-500/30 hover:text-violet-400"
                 >
                   <Phone size={15} />
                   <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[12px] text-white opacity-0 transition group-hover:opacity-100">
-                    +353 86 274 5183
+                    {site.phone}
                   </span>
                 </a>
 
                 <a
-                  href="https://github.com/Lucas-doyle"
+                  href={siteLinks.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-500 hover:border-violet-500/30 hover:text-violet-400"
