@@ -4,7 +4,7 @@ import { useState, useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { ArrowRight, ChevronUp } from "lucide-react";
 import ProjectCard from "@/components/ProjectCard";
-import { projects } from "@/data/projects";
+import { projects, projectFilters } from "@/data/projects";
 
 const FILTER_KEY = "projectsSelectedFilter";
 const SHOW_ALL_KEY = "projectsShowAll";
@@ -66,27 +66,6 @@ function restoreProjectsViewport() {
   return Boolean(target) || savedPosition !== null;
 }
 
-const filterCategories = [
-  { name: "All", filter: "all" },
-  { name: "AI & ML", filter: "ai" },
-  { name: "Full Stack", filter: "fullstack" },
-  { name: "Backend", filter: "backend" },
-  { name: "DevOps", filter: "devops" },
-];
-
-const getCategoryFilter = (category: string): string => {
-  const aiCategories = ["AI / RAG", "AI Agents", "AI / Agents", "AI/SaaS", "AI / Optimization", "AI / Search", "AI / Integration", "AI / LLM", "AI / Document Intelligence"];
-  const fullStackCategories = ["Web Apps", "Full Stack", "Frontend / UX", "Full Stack / SaaS", "Full Stack / AI", "Full Stack / Analytics"];
-  const backendCategories = ["Backend", "Backend / APIs", "Backend / Integration", "Backend / Microservices", "Backend / Data"];
-  const devOpsCategories = ["Cloud / DevOps", "Architecture", "Security / SaaS", "Monitoring / Operations", "Testing / DevOps", "Engineering / Leadership"];
-
-  if (aiCategories.includes(category)) return "ai";
-  if (fullStackCategories.includes(category)) return "fullstack";
-  if (backendCategories.includes(category)) return "backend";
-  if (devOpsCategories.includes(category)) return "devops";
-  return "other";
-};
-
 export default function ProjectsPage() {
   const selectedFilter = useSyncExternalStore(
     subscribeListState,
@@ -102,7 +81,7 @@ export default function ProjectsPage() {
 
   const filteredProjects = selectedFilter === "all"
     ? projects
-    : projects.filter(project => getCategoryFilter(project.category) === selectedFilter);
+    : projects.filter((project) => project.filter === selectedFilter);
 
   const displayedProjects = showAllProjects ? filteredProjects : filteredProjects.slice(0, 12);
 
@@ -203,14 +182,14 @@ export default function ProjectsPage() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          {filterCategories.map((category) => (
+          {projectFilters.map((category) => (
             <button
-              key={category.filter}
+              key={category.id}
               onClick={() => {
-                persistListState(category.filter, showAllProjects);
+                persistListState(category.id, showAllProjects);
               }}
               className={`rounded-lg px-4 py-2 text-[10px] transition ${
-                selectedFilter === category.filter
+                selectedFilter === category.id
                   ? "bg-violet-600 text-white"
                   : "border border-white/10 text-gray-500 hover:text-white hover:border-white/20"
               }`}

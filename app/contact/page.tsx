@@ -6,9 +6,15 @@ import {
   Phone,
   Send,
   Globe,
+  Paperclip,
 } from "lucide-react";
 import { useState } from "react";
 import { site, siteLinks } from "@/data/site";
+import {
+  CONTACT_ACCEPT,
+  CONTACT_MAX_FILE_BYTES,
+  CONTACT_MAX_FILES,
+} from "@/lib/contact-files";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -20,7 +26,7 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [files, setFiles] = useState<File[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -36,12 +42,19 @@ export default function ContactPage() {
     setErrorMessage('');
 
     try {
+      const payload = new FormData();
+      payload.append('name', formData.name);
+      payload.append('email', formData.email);
+      payload.append('subject', formData.subject);
+      payload.append('message', formData.message);
+      payload.append('website', formData.website);
+      files.forEach((file) => {
+        payload.append('files', file);
+      });
+
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        body: payload,
       });
 
       const data = await response.json();
@@ -49,6 +62,7 @@ export default function ContactPage() {
       if (response.ok) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '', website: '' });
+        setFiles([]);
       } else {
         setSubmitStatus('error');
         if (response.status === 503) {
@@ -207,6 +221,51 @@ export default function ContactPage() {
                 rows={8}
                 className="mt-4 w-full resize-none rounded-lg border border-white/10 bg-[#080d1d] px-4 py-4 text-xs text-white outline-none placeholder:text-gray-600 focus:border-violet-500/60"
               />
+
+              <label className="mt-4 flex cursor-pointer items-center gap-2 rounded-lg border border-dashed border-white/10 bg-[#080d1d] px-4 py-3 text-xs text-gray-500 transition hover:border-violet-500/40 hover:text-gray-300">
+                <Paperclip size={14} className="text-violet-400" />
+                <span>
+                  Attach images or files
+                  {files.length > 0
+                    ? ` (${files.length} selected)`
+                    : ` (optional, max ${CONTACT_MAX_FILES})`}
+                </span>
+                <input
+                  type="file"
+                  name="files"
+                  multiple
+                  accept={CONTACT_ACCEPT}
+                  className="sr-only"
+                  onChange={(event) => {
+                    const selected = Array.from(event.target.files ?? []);
+                    if (selected.length > CONTACT_MAX_FILES) {
+                      setSubmitStatus('error');
+                      setErrorMessage(
+                        `You can attach up to ${CONTACT_MAX_FILES} files.`,
+                      );
+                      event.target.value = '';
+                      return;
+                    }
+
+                    const tooLarge = selected.some(
+                      (file) => file.size > CONTACT_MAX_FILE_BYTES,
+                    );
+                    if (tooLarge) {
+                      setSubmitStatus('error');
+                      setErrorMessage('Each file must be 5MB or smaller.');
+                      event.target.value = '';
+                      return;
+                    }
+
+                    setFiles(selected);
+                  }}
+                />
+              </label>
+              {files.length > 0 && (
+                <p className="mt-2 text-[11px] text-gray-500">
+                  {files.map((file) => file.name).join(', ')}
+                </p>
+              )}
 
               {submitStatus === 'success' && (
                 <div className="mt-4 rounded-lg bg-green-500/10 border border-green-500/20 px-4 py-3 text-xs text-green-400">

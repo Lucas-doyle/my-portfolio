@@ -40,6 +40,14 @@ Missing config is never treated as a successful send.
 - The form includes a hidden honeypot field. Filled honeypots get HTTP 200
   and no email is sent
 
+## Attachments
+
+The contact form accepts optional files through Resend attachments:
+
+- Up to 3 files
+- 5MB per file
+- Images (JPEG, PNG, WebP, GIF), PDF, and plain text
+
 ## Important
 
 The `.env.local` file is already in `.gitignore` for security. Never commit

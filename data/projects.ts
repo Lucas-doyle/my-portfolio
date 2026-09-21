@@ -1,7 +1,19 @@
+export const projectFilters = [
+  { id: "all", name: "All" },
+  { id: "ai", name: "AI & ML" },
+  { id: "fullstack", name: "Full Stack" },
+  { id: "backend", name: "Backend" },
+  { id: "devops", name: "DevOps" },
+] as const;
+
+export type ProjectFilterId = (typeof projectFilters)[number]["id"];
+export type ProjectFilter = Exclude<ProjectFilterId, "all">;
+
 export type Project = {
   slug: string;
   title: string;
   category: string;
+  filter: ProjectFilter;
   description: string;
   longDescription: string;
   image: string;
@@ -16,6 +28,7 @@ export const projects: Project[] = [
     slug: "ai-knowledge-assistant",
     title: "AI Knowledge Assistant",
     category: "AI / RAG",
+    filter: "ai",
     description:
       "Enterprise AI assistant using LLMs, semantic search, and RAG for intelligent knowledge retrieval.",
     longDescription:
@@ -41,6 +54,7 @@ export const projects: Project[] = [
     slug: "ai-workflow-automation",
     title: "AI Workflow Automation",
     category: "AI Agents",
+    filter: "ai",
     description:
       "Multi-agent AI platform that automates repetitive business workflows using intelligent agents.",
     longDescription:
@@ -66,6 +80,7 @@ export const projects: Project[] = [
     slug: "ai-customer-support-agent",
     title: "AI Customer Support Agent",
     category: "AI / Agents",
+    filter: "ai",
     description:
       "Intelligent customer support agent that understands user requests and automates support workflows using LLMs.",
     longDescription:
@@ -91,6 +106,7 @@ export const projects: Project[] = [
     slug: "multi-model-ai-assistant",
     title: "Multi-Model AI Assistant",
     category: "AI / LLM",
+    filter: "ai",
     description:
       "Multi-provider AI assistant supporting multiple language models for flexible and intelligent AI experiences.",
     longDescription:
@@ -116,6 +132,7 @@ export const projects: Project[] = [
     slug: "ai-document-intelligence",
     title: "AI Document Intelligence Platform",
     category: "AI / Document Intelligence",
+    filter: "ai",
     description:
       "AI-powered document intelligence platform for extracting, searching, and understanding large collections of business documents.",
     longDescription:
@@ -141,6 +158,7 @@ export const projects: Project[] = [
     slug: "ai-powered-saas-platform",
     title: "AI-Powered SaaS Platform",
     category: "AI/SaaS",
+    filter: "ai",
     description:
       "Production AI SaaS platform combining intelligent assistance with scalable application workflows.",
     longDescription:
@@ -166,6 +184,7 @@ export const projects: Project[] = [
     slug: "real-time-analytics-platform",
     title: "Real-Time Analytics Platform",
     category: "Web Apps",
+    filter: "fullstack",
     description:
       "Real-time dashboards and analytics systems for monitoring large-scale operational data.",
     longDescription:
@@ -191,6 +210,7 @@ export const projects: Project[] = [
     slug: "developer-api-platform",
     title: "Developer API Platform",
     category: "Backend",
+    filter: "backend",
     description:
       "Scalable backend platform providing high-performance REST and GraphQL APIs.",
     longDescription:
@@ -216,6 +236,7 @@ export const projects: Project[] = [
     slug: "microservices-backend-platform",
     title: "Microservices Backend Platform",
     category: "Backend / Microservices",
+    filter: "backend",
     description:
       "Scalable microservices backend designed to support distributed applications and high-volume production workloads.",
     longDescription:
@@ -241,6 +262,7 @@ export const projects: Project[] = [
     slug: "real-time-api-gateway",
     title: "Real-Time API Gateway",
     category: "Backend / APIs",
+    filter: "backend",
     description:
       "High-performance API gateway supporting real-time communication and scalable backend service integration.",
     longDescription:
@@ -266,6 +288,7 @@ export const projects: Project[] = [
     slug: "data-processing-integration-platform",
     title: "Data Processing & Integration Platform",
     category: "Backend / Data",
+    filter: "backend",
     description:
       "Backend platform for integrating external APIs and processing operational data across distributed applications.",
     longDescription:
@@ -291,6 +314,7 @@ export const projects: Project[] = [
     slug: "cloud-native-platform",
     title: "Cloud-Native Platform",
     category: "Cloud / DevOps",
+    filter: "devops",
     description:
       "Scalable cloud infrastructure with containerization and automated deployment pipelines.",
     longDescription:
@@ -316,6 +340,7 @@ export const projects: Project[] = [
     slug: "llm-optimization-engine",
     title: "LLM Optimization Engine",
     category: "AI / Optimization",
+    filter: "ai",
     description:
       "Optimized AI inference workflows to improve response speed and reduce operational costs.",
     longDescription:
@@ -341,6 +366,7 @@ export const projects: Project[] = [
     slug: "semantic-search-engine",
     title: "Semantic Search Engine",
     category: "AI / Search",
+    filter: "ai",
     description:
       "Intelligent search system combining embeddings, vector databases, and semantic retrieval.",
     longDescription:
@@ -366,6 +392,7 @@ export const projects: Project[] = [
     slug: "ai-integration-platform",
     title: "AI Integration Platform",
     category: "AI / Integration",
+    filter: "ai",
     description:
       "AI integration platform connecting LLMs, intelligent agents, APIs, and application workflows.",
     longDescription:
@@ -391,6 +418,7 @@ export const projects: Project[] = [
     slug: "modern-web-application",
     title: "Modern Web Application",
     category: "Full Stack",
+    filter: "fullstack",
     description:
       "High-performance web applications combining responsive interfaces with scalable backend services.",
     longDescription:
@@ -416,6 +444,7 @@ export const projects: Project[] = [
     slug: "enterprise-collaboration-platform",
     title: "Enterprise Collaboration Platform",
     category: "Full Stack",
+    filter: "fullstack",
     description:
       "Scalable collaboration platform combining real-time communication, interactive interfaces, and reliable backend services.",
     longDescription:
@@ -441,6 +470,7 @@ export const projects: Project[] = [
     slug: "real-time-workflow-application",
     title: "Real-Time Workflow Application",
     category: "Full Stack",
+    filter: "fullstack",
     description:
       "Interactive workflow application for managing business processes with real-time updates and responsive interfaces.",
     longDescription:
@@ -466,6 +496,7 @@ export const projects: Project[] = [
     slug: "saas-management-dashboard",
     title: "SaaS Management Dashboard",
     category: "Full Stack / SaaS",
+    filter: "fullstack",
     description:
       "Production-ready SaaS management dashboard for monitoring users, operations, and application activity.",
     longDescription:
@@ -491,6 +522,7 @@ export const projects: Project[] = [
     slug: "ai-powered-customer-portal",
     title: "AI-Powered Customer Portal",
     category: "Full Stack / AI",
+    filter: "fullstack",
     description:
       "Customer-facing web platform combining modern full-stack development with intelligent AI-powered experiences.",
     longDescription:
@@ -516,6 +548,7 @@ export const projects: Project[] = [
     slug: "full-stack-analytics-application",
     title: "Full-Stack Analytics Application",
     category: "Full Stack / Analytics",
+    filter: "fullstack",
     description:
       "Full-stack analytics application transforming operational data into interactive dashboards and actionable insights.",
     longDescription:
@@ -541,6 +574,7 @@ export const projects: Project[] = [
     slug: "enterprise-operations-platform",
     title: "Enterprise Operations Platform",
     category: "Full Stack",
+    filter: "fullstack",
     description:
       "Enterprise web platform for managing operational workflows through scalable frontend and backend services.",
     longDescription:
@@ -566,6 +600,7 @@ export const projects: Project[] = [
     slug: "enterprise-api-services",
     title: "Enterprise API Services",
     category: "Backend / APIs",
+    filter: "backend",
     description:
       "Production API services designed for scalable applications and high-traffic environments.",
     longDescription:
@@ -590,6 +625,7 @@ export const projects: Project[] = [
     slug: "distributed-saas-architecture",
     title: "Distributed SaaS Architecture",
     category: "Architecture",
+    filter: "devops",
     description:
       "Scalable software architecture built for reliable, high-performance distributed systems.",
     longDescription:
@@ -615,6 +651,7 @@ export const projects: Project[] = [
     slug: "authentication-payments",
     title: "Authentication & Payments",
     category: "Security / SaaS",
+    filter: "devops",
     description:
       "Secure application services supporting authentication and payment processing for production SaaS platforms.",
     longDescription:
@@ -640,6 +677,7 @@ export const projects: Project[] = [
     slug: "api-integration-services",
     title: "API Integration Services",
     category: "Backend / Integration",
+    filter: "backend",
     description:
       "Backend services connecting APIs, applications, and data-processing workflows across web and mobile platforms.",
     longDescription:
@@ -665,6 +703,7 @@ export const projects: Project[] = [
     slug: "production-monitoring",
     title: "Production Monitoring",
     category: "Monitoring / Operations",
+    filter: "devops",
     description:
       "Monitoring and debugging solutions designed to improve system stability and reduce production incidents.",
     longDescription:
@@ -690,6 +729,7 @@ export const projects: Project[] = [
     slug: "automated-delivery-pipeline",
     title: "Automated Delivery Pipeline",
     category: "Testing / DevOps",
+    filter: "devops",
     description:
       "Automated testing and CI/CD workflows designed to improve deployment reliability and development efficiency.",
     longDescription:
@@ -715,6 +755,7 @@ export const projects: Project[] = [
     slug: "accessible-web-experience",
     title: "Accessible Web Experience",
     category: "Frontend / UX",
+    filter: "fullstack",
     description:
       "Responsive web interfaces optimized for performance, usability, and accessibility across large-scale applications.",
     longDescription:
@@ -739,6 +780,7 @@ export const projects: Project[] = [
     slug: "technical-architecture",
     title: "Technical Architecture",
     category: "Engineering / Leadership",
+    filter: "devops",
     description:
       "Engineering leadership focused on architecture reviews, system design, technical planning, and scalable software development.",
     longDescription:
