@@ -26,6 +26,7 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
   const [files, setFiles] = useState<File[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -257,6 +258,8 @@ export default function ContactPage() {
                       return;
                     }
 
+                    setSubmitStatus('idle');
+                    setErrorMessage('');
                     setFiles(selected);
                   }}
                 />
