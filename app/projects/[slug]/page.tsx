@@ -31,6 +31,12 @@ export default async function ProjectPage({
     notFound();
   }
 
+  const caseStudy = [
+    { label: "Problem", body: project.problem },
+    { label: "Role", body: project.role },
+    { label: "Outcome", body: project.outcome },
+  ] as const;
+
   return (
     <>
       <ScrollToTop />
@@ -56,19 +62,8 @@ export default async function ProjectPage({
               </h1>
 
               <p className="mt-5 max-w-xl text-sm leading-7 text-gray-400">
-                {project.longDescription}
+                {project.description}
               </p>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                {project.technologies.map((technology, index) => (
-                  <span
-                    key={`${technology}-${index}`}
-                    className="rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-[10px] text-gray-400"
-                  >
-                    {technology}
-                  </span>
-                ))}
-              </div>
 
               {(project.demoUrl || project.repoUrl) && (
                 <div className="mt-7 flex flex-wrap gap-3">
@@ -109,37 +104,38 @@ export default async function ProjectPage({
             </div>
           </div>
 
-          <div className="mt-16 grid gap-12 border-t border-white/[0.07] pt-10 lg:grid-cols-[1fr_0.8fr]">
-            <div>
-              <h2 className="text-lg font-semibold text-white">
-                Project Overview
-              </h2>
-
-              <p className="mt-4 text-sm leading-7 text-gray-500">
-                {project.longDescription}
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-lg font-semibold text-white">
-                Key Features
-              </h2>
-
-              <div className="mt-5 space-y-3">
-                {project.features.map((feature, index) => (
-                  <div
-                    key={`${feature}-${index}`}
-                    className="flex gap-3 text-xs text-gray-500"
-                  >
-                    <Check
-                      size={14}
-                      className="mt-0.5 text-violet-400"
-                    />
-
-                    {feature}
-                  </div>
-                ))}
+          <div className="mt-16 grid gap-8 border-t border-white/[0.07] pt-10 md:grid-cols-3">
+            {caseStudy.map((section) => (
+              <div key={section.label}>
+                <h2 className="text-lg font-semibold text-white">
+                  {section.label}
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-gray-500">
+                  {section.body}
+                </p>
               </div>
+            ))}
+          </div>
+
+          <div className="mt-12 border-t border-white/[0.07] pt-10">
+            <h2 className="text-lg font-semibold text-white">
+              Key Features
+            </h2>
+
+            <div className="mt-5 space-y-3">
+              {project.features.map((feature, index) => (
+                <div
+                  key={`${feature}-${index}`}
+                  className="flex gap-3 text-xs text-gray-500"
+                >
+                  <Check
+                    size={14}
+                    className="mt-0.5 text-violet-400"
+                  />
+
+                  {feature}
+                </div>
+              ))}
             </div>
           </div>
 

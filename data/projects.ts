@@ -15,7 +15,9 @@ export type Project = {
   category: string;
   filter: ProjectFilter;
   description: string;
-  longDescription: string;
+  problem: string;
+  role: string;
+  outcome: string;
   image: string;
   technologies: string[];
   features: string[];
@@ -31,8 +33,11 @@ export const projects: Project[] = [
     filter: "ai",
     description:
       "Production RAG assistant I shipped at Tines so 10,000 monthly users can query enterprise knowledge with GPT-4 and Pinecone.",
-    longDescription:
-      "Enterprise teams at Tines needed answers from large collections of internal content without hunting through documents. As AI Full Stack Software Engineer (2025–Present) I designed and deployed a retrieval-augmented generation assistant using OpenAI GPT-4, OpenAI embeddings, LangChain, and Pinecone, with FastAPI on the backend and a Next.js and TypeScript interface. The assistant retrieves relevant context, grounds replies in that context, and streams the response. It is part of the production AI applications that serve 10,000 monthly users.",
+    problem:
+      "Enterprise teams at Tines needed answers from large collections of internal content without hunting through documents.",
+    role: "As AI Full Stack Software Engineer (2025–Present) I designed and deployed a retrieval-augmented generation assistant using OpenAI GPT-4, OpenAI embeddings, LangChain, and Pinecone, with FastAPI on the backend and a Next.js and TypeScript interface.",
+    outcome:
+      "The assistant retrieves relevant context, grounds replies in that context, and streams the response. It is part of the production AI applications that serve 10,000 monthly users.",
     image: "/images/ai-knowledge-assistant.png",
     technologies: [
       "Python",
@@ -57,8 +62,11 @@ export const projects: Project[] = [
     filter: "ai",
     description:
       "Multi-agent LangGraph workflows I built at Tines so agents can decide next steps and call APIs instead of repeating manual work.",
-    longDescription:
-      "Repetitive, multi-step business processes at Tines still needed a person to choose the next action and hit the right API. I built multi-agent workflows with LangGraph, LangChain, OpenAI GPT-4, and function calling so agents can coordinate, decide, and execute those steps. FastAPI hosts the agent runtime; the interactive tools sit in React and Next.js. I owned the workflows from design through deployment with product and engineering.",
+    problem:
+      "Repetitive, multi-step business processes at Tines still needed a person to choose the next action and hit the right API.",
+    role: "I built multi-agent workflows with LangGraph, LangChain, OpenAI GPT-4, and function calling so agents can coordinate, decide, and execute those steps. FastAPI hosts the agent runtime; the interactive tools sit in React and Next.js.",
+    outcome:
+      "I owned the workflows from design through deployment with product and engineering, so common processes run as agent steps instead of manual API work.",
     image: "/images/ai-workflow-automation.png",
     technologies: [
       "Python",
@@ -83,8 +91,11 @@ export const projects: Project[] = [
     filter: "ai",
     description:
       "Customer-facing GPT-4 agent at Tines that answers from retrieved knowledge and cut manual workflows by 60%.",
-    longDescription:
-      "Customer-facing teams needed faster, contextual answers and fewer hand-built support steps. At Tines I integrated OpenAI GPT-4 into those applications with RAG, LangGraph, and Pinecone so the agent can understand a request, retrieve the right knowledge, and run the follow-up workflow. I owned the feature from user need through delivery with product and design. That LLM integration reduced manual workflows by 60%.",
+    problem:
+      "Customer-facing teams needed faster, contextual answers and fewer hand-built support steps.",
+    role: "At Tines I integrated OpenAI GPT-4 into those applications with RAG, LangGraph, and Pinecone so the agent can understand a request, retrieve the right knowledge, and run the follow-up workflow. I owned the feature from user need through delivery with product and design.",
+    outcome:
+      "That LLM integration reduced manual workflows by 60%.",
     image: "/images/ai-customer-support-agent.png",
     technologies: [
       "Python",
@@ -109,8 +120,11 @@ export const projects: Project[] = [
     filter: "ai",
     description:
       "Unified assistant across OpenAI, Claude, and Gemini, with Tines production traffic running on GPT-4.",
-    longDescription:
-      "Different product features needed different model strengths, but Tines could not grow a separate integration for every provider. I built a shared assistant path that talks to the OpenAI, Claude, and Gemini APIs, with prompt engineering, model selection, and contextual conversations in Python and TypeScript. Production applications I deployed at Tines run on OpenAI GPT-4. The same Next.js interface streams replies so users stay in one conversation surface.",
+    problem:
+      "Different product features needed different model strengths, but Tines could not grow a separate integration for every provider.",
+    role: "I built a shared assistant path that talks to the OpenAI, Claude, and Gemini APIs, with prompt engineering, model selection, and contextual conversations in Python and TypeScript.",
+    outcome:
+      "Production applications I deployed at Tines run on OpenAI GPT-4. The same Next.js interface streams replies so users stay in one conversation surface.",
     image: "/images/multi-model-ai-assistant.png",
     technologies: [
       "Python",
@@ -135,8 +149,11 @@ export const projects: Project[] = [
     filter: "ai",
     description:
       "Tines document RAG that turns unstructured business files into searchable context for GPT-4.",
-    longDescription:
-      "Unstructured business documents were hard to search and even harder to trust as an answer source. At Tines I applied the same enterprise RAG stack I shipped in production—OpenAI embeddings, LangChain, Pinecone, and GPT-4—so users can retrieve and understand information from large document collections. FastAPI serves chunking and retrieval; the Next.js UI asks questions against that index instead of opening files one by one.",
+    problem:
+      "Unstructured business documents were hard to search and even harder to trust as an answer source.",
+    role: "At Tines I applied the same enterprise RAG stack I shipped in production—OpenAI embeddings, LangChain, Pinecone, and GPT-4—so users can retrieve and understand information from large document collections. FastAPI serves chunking and retrieval; the Next.js UI asks questions against that index.",
+    outcome:
+      "Users can question document collections through the RAG assistant instead of opening files one by one.",
     image: "/images/ai-document-intelligence.png",
     technologies: [
       "Python",
@@ -161,8 +178,11 @@ export const projects: Project[] = [
     filter: "ai",
     description:
       "Full-stack Tines AI SaaS I designed and deployed for 10,000 monthly users and thousands of API requests a day.",
-    longDescription:
-      "Tines needed customer-facing AI inside a durable SaaS, not a standalone model demo. I designed and deployed the production applications with React, Next.js, TypeScript, FastAPI, Node.js, and PostgreSQL, and I implemented authentication, payment processing, monitoring, and AWS deployment pipelines. The backends support thousands of API requests daily. These AI applications serve 10,000 monthly users.",
+    problem:
+      "Tines needed customer-facing AI inside a durable SaaS, not a standalone model demo.",
+    role: "I designed and deployed the production applications with React, Next.js, TypeScript, FastAPI, Node.js, and PostgreSQL, and I implemented authentication, payment processing, monitoring, and AWS deployment pipelines.",
+    outcome:
+      "The backends support thousands of API requests daily. These AI applications serve 10,000 monthly users.",
     image: "/images/ai-powered-saas.png",
     technologies: [
       "React",
@@ -186,9 +206,12 @@ export const projects: Project[] = [
     category: "Web Apps",
     filter: "fullstack",
     description:
-      "Real-time dashboards and analytics systems for monitoring large-scale operational data.",
-    longDescription:
-      "A real-time analytics platform designed to transform large-scale operational data into interactive dashboards and useful insights. The system combines modern web technologies with scalable backend services and database infrastructure.",
+      "Real-time operational dashboards I built at Ding over large-scale production data.",
+    problem:
+      "Operations teams at Ding needed live visibility into large-scale operational data, not static reports.",
+    role: "As Senior Full Stack Software Engineer (2022–2025) I built real-time dashboards and analytics systems with React, Next.js, TypeScript, Node.js, and PostgreSQL.",
+    outcome:
+      "Large-scale operational data is available as interactive dashboards in production, not after-the-fact exports.",
     image: "/images/real-time-analytics.png",
     technologies: [
       "React",
@@ -196,14 +219,14 @@ export const projects: Project[] = [
       "TypeScript",
       "Node.js",
       "PostgreSQL",
-      "WebSockets",
+      "Express.js",
     ],
     features: [
-      "Real-time dashboards",
-      "Operational analytics",
-      "Large-scale data processing",
-      "Interactive visualizations",
-      "Performance optimization",
+      "Real-time operational dashboards",
+      "Analytics over large-scale production data",
+      "React and Next.js visualization surfaces",
+      "Node.js and PostgreSQL behind the charts",
+      "Built for high-traffic Ding environments",
     ],
   },
   {
@@ -212,24 +235,27 @@ export const projects: Project[] = [
     category: "Backend",
     filter: "backend",
     description:
-      "Scalable backend platform providing high-performance REST and GraphQL APIs.",
-    longDescription:
-      "A scalable backend platform providing APIs and services for modern web applications. The architecture combines Python and Node.js services with REST and GraphQL APIs to support high-traffic production environments.",
+      "REST and GraphQL APIs I designed at Ding for high-traffic production clients.",
+    problem:
+      "Product surfaces needed one reliable API layer for high traffic, not a new backend for every screen.",
+    role: "At Ding I designed and implemented RESTful and GraphQL APIs with Node.js, Express.js, and PostgreSQL.",
+    outcome:
+      "Client applications share a production API layer built for high-traffic environments.",
     image: "/images/developer-api-platform.png",
     technologies: [
-      "Python",
-      "FastAPI",
       "Node.js",
       "Express.js",
       "REST APIs",
-      "GraphQL"
+      "GraphQL",
+      "PostgreSQL",
+      "TypeScript",
     ],
     features: [
-      "REST APIs",
-      "GraphQL APIs",
-      "Scalable backend services",
-      "Microservice architecture",
-      "High-traffic API support",
+      "REST APIs for product clients",
+      "GraphQL for flexible reads",
+      "Node.js and Express services",
+      "PostgreSQL as the system of record",
+      "Designed for high-traffic Ding production",
     ],
   },
   {
@@ -238,24 +264,27 @@ export const projects: Project[] = [
     category: "Backend / Microservices",
     filter: "backend",
     description:
-      "Scalable microservices backend designed to support distributed applications and high-volume production workloads.",
-    longDescription:
-      "A distributed backend platform built around independently scalable services for modern production applications. The architecture combines Python and Node.js services with REST APIs, PostgreSQL, and microservice patterns to provide reliable and scalable backend infrastructure.",
+      "Independently scalable FastAPI, Node.js, and PostgreSQL services I shipped for Tines production traffic.",
+    problem:
+      "A single backend could not scale every workload as API volume grew.",
+    role: "At Tines I created scalable backend services with FastAPI, Node.js, and PostgreSQL, using pragmatic architecture so services can grow independently.",
+    outcome:
+      "Those services support thousands of API requests daily in production.",
     image: "/images/microservices-backend-platform.png",
     technologies: [
       "Python",
       "FastAPI",
       "Node.js",
-      "Microservices",
       "PostgreSQL",
       "REST APIs",
+      "TypeScript",
     ],
     features: [
-      "Microservice architecture",
-      "Independent service scaling",
-      "RESTful APIs",
-      "Distributed backend services",
-      "Production-ready architecture",
+      "Independently scalable backend services",
+      "FastAPI and Node.js side by side",
+      "PostgreSQL for durable application data",
+      "REST APIs between services and clients",
+      "Thousands of production requests a day at Tines",
     ],
   },
   {
@@ -264,24 +293,27 @@ export const projects: Project[] = [
     category: "Backend / APIs",
     filter: "backend",
     description:
-      "High-performance API gateway supporting real-time communication and scalable backend service integration.",
-    longDescription:
-      "A backend API gateway designed to provide a reliable communication layer between client applications and distributed backend services. The platform supports REST APIs, GraphQL, WebSockets, and scalable service communication for high-traffic applications.",
+      "Ding API layer that fronts REST, GraphQL, and live updates for high-traffic web apps.",
+    problem:
+      "Clients needed one entry point for REST, GraphQL, and live operational updates.",
+    role: "At Ding I designed the production API surface—REST and GraphQL on Node.js and Express—used by enterprise web applications I also led.",
+    outcome:
+      "High-traffic clients talk to one API layer instead of reaching past it into every service.",
     image: "/images/real-time-api-gateway.png",
     technologies: [
       "Node.js",
       "Express.js",
       "REST APIs",
       "GraphQL",
-      "WebSockets",
-      "Microservices",
+      "PostgreSQL",
+      "TypeScript",
     ],
     features: [
-      "API gateway architecture",
-      "REST and GraphQL APIs",
-      "Real-time communication",
-      "Service routing",
-      "High-traffic API support",
+      "Single API entry for product clients",
+      "REST and GraphQL on the same platform",
+      "Node.js and Express routing",
+      "Backed by PostgreSQL",
+      "Used under high-traffic Ding applications",
     ],
   },
   {
@@ -290,9 +322,12 @@ export const projects: Project[] = [
     category: "Backend / Data",
     filter: "backend",
     description:
-      "Backend platform for integrating external APIs and processing operational data across distributed applications.",
-    longDescription:
-      "A backend data integration platform designed to connect external services, process application data, and provide reliable APIs for web and mobile applications. The system combines Python services, Django, Flask, Node.js, SQL, and REST APIs.",
+      "Flipdish backend work that integrated APIs and processed data for web and mobile products.",
+    problem:
+      "Web and mobile products needed shared integrations and processing, not one-off scripts per feature.",
+    role: "As Software Engineer at Flipdish (2018–2022) I built API integrations, backend services, and data-processing systems with Python, Django, Flask, Node.js, and SQL.",
+    outcome:
+      "Web and mobile applications share the same integration and processing path instead of duplicated glue code.",
     image: "/images/data-processing-integration-platform.png",
     technologies: [
       "Python",
@@ -303,11 +338,11 @@ export const projects: Project[] = [
       "SQL",
     ],
     features: [
-      "External API integration",
-      "Data processing",
-      "Backend service orchestration",
-      "REST API services",
-      "Web and mobile integration",
+      "External API integrations",
+      "Data-processing backends",
+      "Django and Flask services",
+      "Node.js alongside Python",
+      "Shared path for web and mobile at Flipdish",
     ],
   },
   {
@@ -316,24 +351,27 @@ export const projects: Project[] = [
     category: "Cloud / DevOps",
     filter: "devops",
     description:
-      "Scalable cloud infrastructure with containerization and automated deployment pipelines.",
-    longDescription:
-      "A cloud-native application platform designed for reliable deployment and scalable production workloads. The infrastructure combines AWS, containerization, Kubernetes, and automated delivery pipelines.",
+      "AWS deployment pipelines I implemented at Tines for production AI and SaaS workloads.",
+    problem:
+      "AI features had to ship on durable cloud infrastructure, not only run on a laptop.",
+    role: "At Tines I implemented monitoring and cloud deployment pipelines on AWS for the FastAPI, Node.js, and Next.js applications I also built.",
+    outcome:
+      "Production AI applications deploy through AWS pipelines and serve 10,000 monthly users.",
     image: "/images/cloud-native-platform.png",
     technologies: [
       "AWS",
       "Docker",
-      "Kubernetes",
       "CI/CD",
       "GitHub Actions",
       "Linux",
+      "Node.js",
     ],
     features: [
-      "AWS cloud deployment",
-      "Docker containerization",
-      "Kubernetes orchestration",
-      "CI/CD pipelines",
-      "Production infrastructure",
+      "AWS cloud deployment pipelines",
+      "Containerized application delivery",
+      "CI/CD into production",
+      "Monitoring alongside deploy",
+      "Hosts Tines apps used by 10,000 monthly users",
     ],
   },
   {
@@ -343,8 +381,11 @@ export const projects: Project[] = [
     filter: "ai",
     description:
       "Inference work at Tines that cut GPT-4 response times by 40% and operational cost by 35%.",
-    longDescription:
-      "Unoptimized GPT-4 calls were too slow and expensive for Tines production traffic. I improved inference with response caching, prompt engineering, and streaming so users see tokens sooner and we spend less per request. Those changes improved response times by 40% and reduced operational costs by 35%. The same streaming path powers the React and Next.js AI interfaces I built.",
+    problem:
+      "Unoptimized GPT-4 calls were too slow and expensive for Tines production traffic.",
+    role: "I improved inference with response caching, prompt engineering, and streaming so users see tokens sooner and we spend less per request.",
+    outcome:
+      "Response times improved by 40% and operational costs fell by 35%. The same streaming path powers the React and Next.js AI interfaces I built.",
     image: "/images/llm-optimization.png",
     technologies: [
       "Python",
@@ -369,8 +410,11 @@ export const projects: Project[] = [
     filter: "ai",
     description:
       "Pinecone semantic search I built under Tines RAG so queries match meaning, not just keywords.",
-    longDescription:
-      "Keyword search missed meaning across Tines enterprise content, so retrieval for GPT-4 was thin. I built the semantic search layer with OpenAI embeddings and Pinecone: queries are embedded, similar chunks are ranked, and that context is passed into the RAG assistant. Python and FastAPI serve the retrieval API that the knowledge and document products share.",
+    problem:
+      "Keyword search missed meaning across Tines enterprise content, so retrieval for GPT-4 was thin.",
+    role: "I built the semantic search layer with OpenAI embeddings and Pinecone: queries are embedded, similar chunks are ranked, and that context is passed into the RAG assistant. Python and FastAPI serve the retrieval API.",
+    outcome:
+      "The knowledge and document products share one meaning-based retrieval path instead of keyword-only search.",
     image: "/images/semantic-search.png",
     technologies: [
       "Python",
@@ -395,8 +439,11 @@ export const projects: Project[] = [
     filter: "ai",
     description:
       "Wiring OpenAI, Claude, Gemini, and function-calling agents into Tines APIs and product workflows.",
-    longDescription:
-      "Tines features needed models and agents attached to existing APIs, not a chat box on the side. I integrated OpenAI, Claude, and Gemini, plus agent function calling, into FastAPI and Node.js services and Next.js UIs so the product can take actions, not only generate text. I owned those AI-driven features from user need through delivery with product, design, and engineering.",
+    problem:
+      "Tines features needed models and agents attached to existing APIs, not a chat box on the side.",
+    role: "I integrated OpenAI, Claude, and Gemini, plus agent function calling, into FastAPI and Node.js services and Next.js UIs so the product can take actions, not only generate text.",
+    outcome:
+      "I owned those AI-driven features from user need through delivery with product, design, and engineering.",
     image: "/images/ai-integration.png",
     technologies: [
       "OpenAI GPT-4",
@@ -420,24 +467,27 @@ export const projects: Project[] = [
     category: "Full Stack",
     filter: "fullstack",
     description:
-      "High-performance web applications combining responsive interfaces with scalable backend services.",
-    longDescription:
-      "A modern full-stack web application combining responsive frontend interfaces with scalable backend services and database infrastructure. The architecture is designed for performance, usability, and reliable production delivery.",
+      "Enterprise React and Next.js apps I led at Ding, with a 30% performance gain from data and service work.",
+    problem:
+      "Enterprise web applications at Ding were hard to evolve and too slow under production load.",
+    role: "I led development of enterprise-scale web applications using React, Next.js, Node.js, Express, and PostgreSQL, and I improved performance through database optimization, indexing, and service refactoring.",
+    outcome:
+      "Application performance improved by 30%.",
     image: "/images/modern-web-application.png",
     technologies: [
       "React",
       "Next.js",
       "TypeScript",
       "Node.js",
-      "Python",
+      "Express.js",
       "PostgreSQL",
     ],
     features: [
-      "Responsive user interfaces",
-      "Full-stack development",
-      "Scalable backend services",
-      "API-driven architecture",
-      "Performance optimization",
+      "Led enterprise-scale Ding web applications",
+      "React and Next.js interfaces",
+      "Node.js, Express, and PostgreSQL backends",
+      "Indexing and service refactoring",
+      "30% faster application performance",
     ],
   },
   {
@@ -446,9 +496,12 @@ export const projects: Project[] = [
     category: "Full Stack",
     filter: "fullstack",
     description:
-      "Scalable collaboration platform combining real-time communication, interactive interfaces, and reliable backend services.",
-    longDescription:
-      "An enterprise collaboration platform designed to support teams working with shared information and workflows. The application combines React and Next.js interfaces with TypeScript, Node.js services, PostgreSQL, and real-time communication to deliver a responsive and scalable user experience.",
+      "Cross-functional Ding web platform for teams sharing operational work across industries.",
+    problem:
+      "Stakeholders across industries needed to work from the same live application, not separate exports.",
+    role: "At Ding I led enterprise-scale React and Next.js applications and collaborated with cross-functional stakeholders to deliver scalable software across multiple industries.",
+    outcome:
+      "Teams share one production web platform instead of disconnected tools per industry.",
     image: "/images/enterprise-collaboration-platform.png",
     technologies: [
       "React",
@@ -456,14 +509,14 @@ export const projects: Project[] = [
       "TypeScript",
       "Node.js",
       "PostgreSQL",
-      "WebSockets",
+      "Express.js",
     ],
     features: [
-      "Real-time collaboration",
-      "Interactive user interfaces",
-      "Real-time communication",
-      "Scalable backend services",
-      "Persistent data management",
+      "Shared operational workspace in the product",
+      "React and Next.js collaboration UI",
+      "Node.js and PostgreSQL persistence",
+      "Delivered with product and engineering stakeholders",
+      "Used across multiple Ding industries",
     ],
   },
   {
@@ -472,24 +525,27 @@ export const projects: Project[] = [
     category: "Full Stack",
     filter: "fullstack",
     description:
-      "Interactive workflow application for managing business processes with real-time updates and responsive interfaces.",
-    longDescription:
-      "A full-stack workflow application designed to help users create, manage, and monitor business processes. The platform combines modern React interfaces with Next.js, TypeScript, Node.js services, and WebSockets to provide real-time workflow updates and interactive application experiences.",
+      "Interactive Tines workflow UI I built so people can watch and steer AI automation as it runs.",
+    problem:
+      "Agent workflows were hard to watch and steer while they ran.",
+    role: "At Tines I developed responsive AI-powered interfaces in React, Next.js, and TypeScript, including interactive workflow automation tools next to the LangGraph agents I also built.",
+    outcome:
+      "Users can follow and guide automation in the product UI instead of waiting on a finished batch.",
     image: "/images/real-time-workflow-application.png",
     technologies: [
       "React",
       "Next.js",
       "TypeScript",
       "Node.js",
-      "WebSockets",
+      "FastAPI",
       "PostgreSQL",
     ],
     features: [
-      "Interactive workflow management",
-      "Real-time updates",
-      "Responsive interfaces",
-      "API-driven architecture",
-      "Workflow monitoring",
+      "Interactive workflow automation tools",
+      "React and Next.js operator UI",
+      "Tied to Tines multi-agent backends",
+      "Streaming, real-time product experience",
+      "Owned with product and engineering",
     ],
   },
   {
@@ -498,9 +554,12 @@ export const projects: Project[] = [
     category: "Full Stack / SaaS",
     filter: "fullstack",
     description:
-      "Production-ready SaaS management dashboard for monitoring users, operations, and application activity.",
-    longDescription:
-      "A scalable SaaS management dashboard designed to provide users with centralized visibility into application activity and operational data. The platform combines React, Next.js, TypeScript, Node.js, and PostgreSQL to deliver a responsive and maintainable full-stack application.",
+      "Ding operational dashboard for monitoring application activity and large-scale production data.",
+    problem:
+      "Operators lacked a single product view of application activity and operational data.",
+    role: "At Ding I built real-time dashboards and analytics systems with React, Next.js, Node.js, and PostgreSQL, and exposed the data through REST and GraphQL APIs I also designed.",
+    outcome:
+      "Operations data is visible in an interactive dashboard instead of only in the database.",
     image: "/images/saas-management-dashboard.png",
     technologies: [
       "React",
@@ -511,11 +570,11 @@ export const projects: Project[] = [
       "REST APIs",
     ],
     features: [
-      "SaaS administration",
-      "Operational dashboards",
-      "User management",
-      "Data-driven interfaces",
-      "Scalable API architecture",
+      "Operational activity dashboard",
+      "React and Next.js admin UI",
+      "REST APIs into PostgreSQL data",
+      "Built on Ding analytics work",
+      "Meant for high-traffic production",
     ],
   },
   {
@@ -524,9 +583,12 @@ export const projects: Project[] = [
     category: "Full Stack / AI",
     filter: "fullstack",
     description:
-      "Customer-facing web platform combining modern full-stack development with intelligent AI-powered experiences.",
-    longDescription:
-      "A customer-facing application that integrates AI capabilities into a modern full-stack web experience. The platform combines React, Next.js, TypeScript, Python backend services, and LLM-powered functionality to provide intelligent assistance within everyday customer workflows.",
+      "Customer-facing Tines UI I built with Next.js and GPT-4 so AI sits inside everyday product workflows.",
+    problem:
+      "Customers needed AI inside the product they already use, not a separate chat tool.",
+    role: "At Tines I developed responsive AI-powered user interfaces with React, Next.js, and TypeScript, including streaming responses, on FastAPI and Node backends I also shipped.",
+    outcome:
+      "Customer-facing AI lives in the production UI used by 10,000 monthly users.",
     image: "/images/ai-powered-customer-portal.png",
     technologies: [
       "React",
@@ -534,14 +596,14 @@ export const projects: Project[] = [
       "TypeScript",
       "Python",
       "FastAPI",
-      "OpenAI",
+      "OpenAI GPT-4",
     ],
     features: [
-      "AI-powered customer experience",
-      "Responsive web interface",
-      "LLM integration",
-      "Full-stack architecture",
-      "Intelligent workflow assistance",
+      "AI inside customer-facing Tines screens",
+      "Streaming GPT-4 responses",
+      "React and Next.js portal UI",
+      "FastAPI and Node backends",
+      "Part of the 10,000 monthly-user product",
     ],
   },
   {
@@ -550,9 +612,12 @@ export const projects: Project[] = [
     category: "Full Stack / Analytics",
     filter: "fullstack",
     description:
-      "Full-stack analytics application transforming operational data into interactive dashboards and actionable insights.",
-    longDescription:
-      "A full-stack analytics application designed to process operational data and present useful insights through interactive web interfaces. The system combines React, Next.js, TypeScript, Node.js, and PostgreSQL to provide scalable data-driven experiences.",
+      "Full Ding analytics app: GraphQL and REST into PostgreSQL, React charts on top.",
+    problem:
+      "Large-scale operational data was available in services but not as a product people could explore.",
+    role: "At Ding I built the full analytics path—PostgreSQL, Node.js, REST and GraphQL APIs, and React/Next.js dashboards—for operational data.",
+    outcome:
+      "Stakeholders read large-scale operational data from an interactive application, not a raw query.",
     image: "/images/full-stack-analytics-application.png",
     technologies: [
       "React",
@@ -563,11 +628,11 @@ export const projects: Project[] = [
       "GraphQL",
     ],
     features: [
-      "Interactive analytics",
-      "Operational dashboards",
-      "Data visualization",
-      "GraphQL integration",
-      "Scalable data architecture",
+      "End-to-end analytics application",
+      "GraphQL and REST data access",
+      "PostgreSQL operational store",
+      "Interactive React dashboards",
+      "Built for Ding production traffic",
     ],
   },
   {
@@ -576,9 +641,12 @@ export const projects: Project[] = [
     category: "Full Stack",
     filter: "fullstack",
     description:
-      "Enterprise web platform for managing operational workflows through scalable frontend and backend services.",
-    longDescription:
-      "An enterprise-grade full-stack platform designed to support operational workflows and business processes. The application combines responsive React and Next.js interfaces with TypeScript, Node.js services, PostgreSQL, and API-driven architecture for reliable production use.",
+      "Enterprise-scale Ding web platform I led for operational work across multiple industries.",
+    problem:
+      "Operational work sat in disconnected tools that did not scale with traffic or new industries.",
+    role: "I led development of enterprise-scale web applications at Ding using React, Next.js, Node.js, Express, and PostgreSQL, working with cross-functional stakeholders.",
+    outcome:
+      "Operational workflows run in a shared production platform delivered across multiple industries.",
     image: "/images/enterprise-operations-platform.png",
     technologies: [
       "React",
@@ -589,11 +657,11 @@ export const projects: Project[] = [
       "REST APIs",
     ],
     features: [
-      "Enterprise workflows",
-      "Responsive application interfaces",
-      "API-driven architecture",
-      "Operational management",
-      "Scalable application services",
+      "Enterprise operational workflows in one app",
+      "React and Next.js interfaces",
+      "API-driven Node.js and PostgreSQL services",
+      "Led with cross-functional stakeholders",
+      "Shipped across multiple Ding industries",
     ],
   },
   {
@@ -602,23 +670,27 @@ export const projects: Project[] = [
     category: "Backend / APIs",
     filter: "backend",
     description:
-      "Production API services designed for scalable applications and high-traffic environments.",
-    longDescription:
-      "A production API architecture designed to support enterprise applications and high-traffic workloads. The system combines REST and GraphQL services with scalable backend technologies and database infrastructure.",
+      "Production REST and GraphQL services I implemented at Ding behind high-traffic enterprise apps.",
+    problem:
+      "Enterprise applications needed production API services that could take high traffic, not prototypes.",
+    role: "At Ding I implemented RESTful and GraphQL APIs with Node.js, Express, and PostgreSQL in support of the enterprise web applications I led.",
+    outcome:
+      "High-traffic production environments share a stable API service layer.",
     image: "/images/enterprise-api-services.png",
     technologies: [
+      "Node.js",
+      "Express.js",
       "REST APIs",
-      "GraphQL APIs",
-      "High-traffic services",
-      "Backend architecture",
-      "Database integration",
+      "GraphQL",
+      "PostgreSQL",
+      "TypeScript",
     ],
     features: [
-      "Modern web application",
-      "Responsive design",
-      "Scalable architecture",
-      "Cloud deployment",
-      "Scalable architecture",
+      "Production REST services",
+      "GraphQL for product reads",
+      "Node.js and Express implementation",
+      "PostgreSQL-backed resources",
+      "Supports high-traffic Ding applications",
     ],
   },
   {
@@ -627,24 +699,27 @@ export const projects: Project[] = [
     category: "Architecture",
     filter: "devops",
     description:
-      "Scalable software architecture built for reliable, high-performance distributed systems.",
-    longDescription:
-      "A scalable software architecture approach for building reliable SaaS platforms and distributed applications. The architecture focuses on system design, scalability, performance, and resilient communication between application services.",
+      "System design and architecture reviews I ran at Ding, plus pragmatic service design at Tines.",
+    problem:
+      "Growing SaaS workloads needed clearer service boundaries and performance work, not a larger monolith.",
+    role: "At Ding I conducted architecture reviews and technical planning. At Tines I made pragmatic architecture decisions for FastAPI, Node.js, and PostgreSQL services on AWS.",
+    outcome:
+      "Services can scale independently and still support thousands of API requests a day in production.",
     image: "/images/distributed-saas-architecture.png",
     technologies: [
       "System Design",
       "Distributed Systems",
-      "Microservices",
-      "Scalability",
-      "Performance",
+      "PostgreSQL",
+      "Node.js",
+      "FastAPI",
       "AWS",
     ],
     features: [
-      "Distributed systems",
-      "System design",
-      "Microservices",
-      "Scalable architecture",
-      "Performance optimization",
+      "Architecture reviews and technical planning",
+      "Service boundaries for SaaS workloads",
+      "Pragmatic FastAPI and Node.js design",
+      "AWS-hosted production services",
+      "Thousands of daily API requests at Tines",
     ],
   },
   {
@@ -653,9 +728,12 @@ export const projects: Project[] = [
     category: "Security / SaaS",
     filter: "devops",
     description:
-      "Secure application services supporting authentication and payment processing for production SaaS platforms.",
-    longDescription:
-      "Production SaaS application services supporting essential account and business operations. The platform integrates authentication and payment capabilities with scalable backend services and cloud infrastructure.",
+      "Auth, payments, and AWS pipelines I implemented for Tines production SaaS.",
+    problem:
+      "The AI product needed account and billing services, not only model features.",
+    role: "At Tines I implemented authentication, payment processing, monitoring, and cloud deployment pipelines on AWS, on FastAPI, Node.js, PostgreSQL, and TypeScript services.",
+    outcome:
+      "Production users can sign in and pay on the same platform that serves 10,000 monthly users.",
     image: "/images/authentication-payments.png",
     technologies: [
       "Node.js",
@@ -666,11 +744,11 @@ export const projects: Project[] = [
       "TypeScript",
     ],
     features: [
-       "User authentication",
-       "Payment processing",
-       "Backend integration",
-       "Production services",
-       "Cloud deployment",
+      "User authentication in production",
+      "Payment processing on the SaaS",
+      "Monitoring next to those services",
+      "AWS deployment pipelines",
+      "Part of the Tines 10,000-user platform",
     ],
   },
   {
@@ -679,9 +757,12 @@ export const projects: Project[] = [
     category: "Backend / Integration",
     filter: "backend",
     description:
-      "Backend services connecting APIs, applications, and data-processing workflows across web and mobile platforms.",
-    longDescription:
-      "Backend integration services designed to connect applications with external APIs and process data across web and mobile environments. The architecture combines Python and Node.js services with reliable API communication.",
+      "Flipdish integrations that connected external APIs to web and mobile backends.",
+    problem:
+      "Web and mobile products depended on third-party APIs that were wired inconsistently.",
+    role: "At Flipdish I built API integrations and backend services with Python, Django, Flask, Node.js, and REST APIs.",
+    outcome:
+      "Web and mobile applications share a consistent integration layer instead of one-off connectors.",
     image: "/images/api-integration-services.png",
     technologies: [
       "Python",
@@ -692,11 +773,11 @@ export const projects: Project[] = [
       "SQL",
     ],
     features: [
-      "API integrations",
-      "Backend services",
-      "Data processing",
-      "Web application support",
-      "Mobile application support",
+      "External API connectors",
+      "Shared backend integration services",
+      "Django and Flask implementations",
+      "Node.js services where needed",
+      "Used by Flipdish web and mobile",
     ],
   },
   {
@@ -705,24 +786,27 @@ export const projects: Project[] = [
     category: "Monitoring / Operations",
     filter: "devops",
     description:
-      "Monitoring and debugging solutions designed to improve system stability and reduce production incidents.",
-    longDescription:
-      "A production operations approach focused on improving application stability and reducing incidents through monitoring, debugging, and continuous system analysis.",
+      "Flipdish monitoring and testing work that improved stability and reduced production incidents.",
+    problem:
+      "Production issues were found late and tended to repeat.",
+    role: "At Flipdish I improved system stability through monitoring, debugging, and automated testing, and I took part in continuous delivery so fixes reached production faster.",
+    outcome:
+      "The applications were more stable and production incidents went down.",
     image: "/images/production-monitoring.png",
     technologies: [
-      "AWS",
       "Linux",
       "Docker",
-      "Monitoring",
-      "Debugging",
-      "Performance",
+      "Testing",
+      "CI/CD",
+      "Python",
+      "Node.js",
     ],
     features: [
-      "Application monitoring",
-      "Production debugging",
-      "System stability",
-      "Incident reduction",
-      "Performance analysis",
+      "Application monitoring in production",
+      "Debugging repeating incidents",
+      "Automated testing around releases",
+      "Continuous delivery of fixes",
+      "Improved Flipdish system stability",
     ],
   },
   {
@@ -731,24 +815,27 @@ export const projects: Project[] = [
     category: "Testing / DevOps",
     filter: "devops",
     description:
-      "Automated testing and CI/CD workflows designed to improve deployment reliability and development efficiency.",
-    longDescription:
-      "An automated software delivery workflow designed to improve development efficiency and deployment reliability. The approach combines automated testing with CI/CD pipelines and continuous delivery practices.",
+      "Automated testing and CI/CD I introduced at Ding to make deployments more reliable.",
+    problem:
+      "Releases depended on manual steps and failed too often.",
+    role: "At Ding I introduced automated testing, CI/CD pipelines, and engineering best practices. At Flipdish I already worked in continuous delivery, sprint planning, and code reviews.",
+    outcome:
+      "Deployment reliability improved once tests and pipelines ran on every release.",
     image: "/images/automated-delivery-pipeline.png",
     technologies: [
       "CI/CD",
       "GitHub Actions",
       "Testing",
       "Docker",
-      "AWS",
       "Linux",
+      "AWS",
     ],
     features: [
-      "Automated testing",
-      "CI/CD pipelines",
-      "Continuous delivery",
-      "Deployment automation",
-      "Release reliability",
+      "Automated test suites on change",
+      "CI/CD pipelines for Ding releases",
+      "Continuous delivery practice",
+      "Fewer manual release steps",
+      "Improved deployment reliability",
     ],
   },
   {
@@ -757,9 +844,12 @@ export const projects: Project[] = [
     category: "Frontend / UX",
     filter: "fullstack",
     description:
-      "Responsive web interfaces optimized for performance, usability, and accessibility across large-scale applications.",
-    longDescription:
-      "A responsive frontend development approach focused on creating high-performance and accessible web applications. The implementation combines modern React technologies with optimized user interfaces.",
+      "Frontend performance and accessibility work I did on large Flipdish applications.",
+    problem:
+      "Large-scale Flipdish applications were uneven to use and slower than they needed to be.",
+    role: "I enhanced frontend performance and accessibility across multiple large-scale applications, working with designers and product managers, using React and related web stack.",
+    outcome:
+      "Those applications are faster and more accessible.",
     image: "/images/accessible-web-experience.png",
     technologies: [
       "React",
@@ -767,13 +857,14 @@ export const projects: Project[] = [
       "Tailwind CSS",
       "HTML5",
       "CSS3",
+      "TypeScript",
     ],
     features: [
-      "Responsive interfaces",
-      "Frontend performance",
-      "Web accessibility",
-      "Modern React development",
-      "User experience optimization",
+      "Accessibility work on large Flipdish apps",
+      "Frontend performance improvements",
+      "React interfaces with designers and PMs",
+      "HTML and CSS fundamentals kept honest",
+      "Shipped through Agile delivery",
     ],
   },
   {
@@ -782,24 +873,27 @@ export const projects: Project[] = [
     category: "Engineering / Leadership",
     filter: "devops",
     description:
-      "Engineering leadership focused on architecture reviews, system design, technical planning, and scalable software development.",
-    longDescription:
-      "A technical leadership and architecture practice focused on designing scalable systems, reviewing application architecture, and guiding engineering teams toward reliable software solutions.",
+      "Architecture reviews, technical planning, and mentoring I did as a senior engineer at Ding.",
+    problem:
+      "The team needed shared design standards and review, not one-off decisions per feature.",
+    role: "At Ding I mentored junior developers and conducted architecture reviews and technical planning sessions, on top of leading enterprise-scale web application development.",
+    outcome:
+      "Delivery follows reviewed architecture and shared planning instead of isolated feature design.",
     image: "/images/technical-architecture.png",
     technologies: [
       "System Design",
       "Architecture",
-      "Distributed Systems",
-      "Scalability",
       "Code Reviews",
-      "Technical",
+      "React",
+      "Node.js",
+      "PostgreSQL",
     ],
     features: [
-      "Architecture reviews",
-      "System design",
-      "Technical planning",
-      "Code reviews",
-      "Engineering leadership",
+      "Architecture reviews with the team",
+      "Technical planning sessions",
+      "Mentoring junior developers",
+      "Standards on Ding enterprise apps",
+      "Tied to React, Node.js, and PostgreSQL systems",
     ],
-  }
+  },
 ];
