@@ -39,14 +39,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const name = asText(formData.get("name"));
-    const email = asText(formData.get("email"));
-    const subject = asText(formData.get("subject"));
-    const message = asText(formData.get("message"));
+    const name = asText(formData.get("name")).trim();
+    const email = asText(formData.get("email")).trim();
+    const subject = asText(formData.get("subject")).trim();
+    const message = asText(formData.get("message")).trim();
 
-    if (!name || !email || !subject || !message) {
+    if (!name || !email || !subject) {
       return NextResponse.json(
-        { error: "All fields are required" },
+        { error: "Name, email, and subject are required" },
         { status: 400 },
       );
     }
@@ -76,6 +76,13 @@ export async function POST(request: NextRequest) {
     const uploaded = formData
       .getAll("files")
       .filter((entry): entry is File => entry instanceof File && entry.size > 0);
+
+    if (!message && uploaded.length === 0) {
+      return NextResponse.json(
+        { error: "Add a message or attach at least one file." },
+        { status: 400 },
+      );
+    }
 
     if (uploaded.length > CONTACT_MAX_FILES) {
       return NextResponse.json(
@@ -125,7 +132,11 @@ export async function POST(request: NextRequest) {
       <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
       <hr style="margin: 20px 0;">
       <p><strong>Message:</strong></p>
-      <p style="white-space: pre-wrap;">${escapeHtml(message)}</p>
+      <p style="white-space: pre-wrap;">${
+        message
+          ? escapeHtml(message)
+          : escapeHtml("(No message body — see attached file(s).)")
+      }</p>
       <hr style="margin: 20px 0;">
       <p style="color: #666; font-size: 12px;">
         Sent from portfolio contact form on ${escapeHtml(new Date().toLocaleString())}

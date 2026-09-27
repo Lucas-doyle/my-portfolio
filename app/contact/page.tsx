@@ -42,6 +42,13 @@ export default function ContactPage() {
     setSubmitStatus('idle');
     setErrorMessage('');
 
+    if (!formData.message.trim() && files.length === 0) {
+      setSubmitStatus('error');
+      setErrorMessage('Add a message or attach at least one file.');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const payload = new FormData();
       payload.append('name', formData.name);
@@ -215,10 +222,9 @@ export default function ContactPage() {
 
               <textarea
                 name="message"
-                placeholder="Your Message"
+                placeholder="Your Message (or attach a file below)"
                 value={formData.message}
                 onChange={handleChange}
-                required
                 rows={8}
                 className="mt-4 w-full resize-none rounded-lg border border-white/10 bg-[#080d1d] px-4 py-4 text-xs text-white outline-none placeholder:text-gray-600 focus:border-violet-500/60"
               />
@@ -229,7 +235,7 @@ export default function ContactPage() {
                   Attach images or files
                   {files.length > 0
                     ? ` (${files.length} selected)`
-                    : ` (optional, max ${CONTACT_MAX_FILES})`}
+                    : ` (message or file required, max ${CONTACT_MAX_FILES})`}
                 </span>
                 <input
                   type="file"
