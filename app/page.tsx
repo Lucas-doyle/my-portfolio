@@ -1,55 +1,15 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { BriefcaseBusiness, Mail } from "lucide-react";
-import { useState, useEffect } from "react";
+import TypingEffect from "@/components/TypingEffect";
+import { site } from "@/data/site";
 
-function TypingEffect() {
-  const [currentPhrase, setCurrentPhrase] = useState("");
-  const [phraseIndex, setPhraseIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(150);
-
-  useEffect(() => {
-    const phrases = [
-      "AI Full Stack Developer",
-      "Senior Software Engineer",
-      "Creating AI-Powered Solutions",
-      "Cloud-Native Applications"
-    ];
-    const currentFullPhrase = phrases[phraseIndex];
-    
-    const timer = setTimeout(() => {
-      if (!isDeleting) {
-        if (currentPhrase.length < currentFullPhrase.length) {
-          setCurrentPhrase(currentFullPhrase.substring(0, currentPhrase.length + 1));
-          setTypingSpeed(150);
-        } else {
-          setIsDeleting(true);
-          setTypingSpeed(2000); // Pause before deleting
-        }
-      } else {
-        if (currentPhrase.length > 0) {
-          setCurrentPhrase(currentPhrase.substring(0, currentPhrase.length - 1));
-          setTypingSpeed(75);
-        } else {
-          setIsDeleting(false);
-          setPhraseIndex((phraseIndex + 1) % phrases.length);
-          setTypingSpeed(500); // Pause before typing next phrase
-        }
-      }
-    }, typingSpeed);
-
-    return () => clearTimeout(timer);
-  }, [currentPhrase, isDeleting, phraseIndex, typingSpeed]);
-
-  return (
-    <h1 className="mt-1 h-[100px] md:h-[120px] text-[48px] font-bold leading-[1.05] tracking-tight md:text-[65px] text-white">
-      {currentPhrase}
-    </h1>
-  );
-}
+export const metadata: Metadata = {
+  title: site.role,
+  description:
+    "Portfolio of an AI Full Stack Software Engineer specializing in Generative AI, Python, TypeScript, React and Next.js.",
+};
 
 function SmallIcon({
   children,
@@ -63,21 +23,13 @@ function SmallIcon({
   );
 }
 
-/* =========================================================
-   Laptop / Developer Illustration
-   ========================================================= */
-
 function DeveloperLaptop() {
   return (
-    <div className="relative mx-auto h-[500px] w-full max-w-[1100px]">
-      {/* Glow effect background */}
+    <div className="relative mx-auto h-[360px] w-full max-w-[1100px] sm:h-[420px] lg:h-[500px]">
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-600/20 via-purple-500/10 to-transparent blur-3xl" />
-
-      {/* Subtle gradient overlay */}
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-violet-900/10 to-transparent" />
 
-      {/* Image with subtle border and shadow */}
-      <div className="relative h-full w-full rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm shadow-2xl shadow-violet-500/10 overflow-hidden">
+      <div className="relative h-full w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-4 shadow-2xl shadow-violet-500/10 backdrop-blur-sm">
         <Image
           src="/images/laptop-dev.png"
           alt="Developer laptop setup with code, plant, and coffee"
@@ -86,18 +38,19 @@ function DeveloperLaptop() {
           priority
         />
       </div>
-      
-      {/* Floating particles effect */}
+
       <div className="absolute -right-4 top-10 h-2 w-2 rounded-full bg-violet-400/60 blur-[2px] animate-pulse" />
-      <div className="absolute -left-2 bottom-20 h-3 w-3 rounded-full bg-purple-400/50 blur-[3px] animate-pulse" style={{ animationDelay: '1s' }} />
-      <div className="absolute right-10 bottom-10 h-2 w-2 rounded-full bg-violet-300/70 blur-[2px] animate-pulse" style={{ animationDelay: '2s' }} />
+      <div
+        className="absolute -left-2 bottom-20 h-3 w-3 rounded-full bg-purple-400/50 blur-[3px] animate-pulse"
+        style={{ animationDelay: "1s" }}
+      />
+      <div
+        className="absolute right-10 bottom-10 h-2 w-2 rounded-full bg-violet-300/70 blur-[2px] animate-pulse"
+        style={{ animationDelay: "2s" }}
+      />
     </div>
   );
 }
-
-/* =========================================================
-   Statistic Card
-   ========================================================= */
 
 function StatCard({
   icon,
@@ -114,15 +67,11 @@ function StatCard({
 
       <div>
         <p className="text-xl font-bold leading-none text-white">{number}</p>
-        <p className="text-[9px] text-gray-400">{label}</p>
+        <p className="text-[11px] text-gray-400">{label}</p>
       </div>
     </div>
   );
 }
-
-/* =========================================================
-   Feature Card
-   ========================================================= */
 
 function FeatureCard({
   icon,
@@ -136,8 +85,8 @@ function FeatureCard({
   return (
     <div>
       <div className="relative inline-block">
-        <div className="absolute -left-4 top-7 h-40 border-l border-white/1 bg-violet-500/60" />
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-violet-500/40 bg-violet-500/5 text-violet-400 mt-7">
+        <div className="absolute -left-4 top-7 h-40 w-px bg-violet-500/60" />
+        <div className="mt-7 flex h-12 w-12 items-center justify-center rounded-2xl border border-violet-500/40 bg-violet-500/5 text-violet-400">
           {icon}
         </div>
       </div>
@@ -153,47 +102,117 @@ function FeatureCard({
   );
 }
 
-/* =========================================================
-   HOME PAGE
-   ========================================================= */
+const stats = [
+  {
+    number: "7+",
+    label: "Years Experience",
+    icon: (
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+      >
+        <rect x="4" y="5" width="16" height="15" rx="2" />
+        <path d="M8 3v4" />
+        <path d="M16 3v4" />
+        <path d="M4 10h16" />
+      </svg>
+    ),
+  },
+  {
+    number: "20+",
+    label: "Projects Delivered",
+    icon: (
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+      >
+        <path d="M8 8h8" />
+        <path d="M8 12h5" />
+        <path d="M8 16h4" />
+        <path d="M5 3h14v18H5z" />
+      </svg>
+    ),
+  },
+  {
+    number: "10K+",
+    label: "Monthly Users",
+    icon: (
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+      >
+        <circle cx="9" cy="8" r="3" />
+        <circle cx="17" cy="9" r="2" />
+        <path d="M3 20a6 6 0 0 1 12 0" />
+        <path d="M14 17a5 5 0 0 1 7 3" />
+      </svg>
+    ),
+  },
+] as const;
 
 export default function HomePage() {
   return (
     <div className="page">
-      {/* =====================================================
-          HERO
-      ===================================================== */}
-
       <section className="container-page homepage-container py-12">
-        <div className="grid items-center gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-          {/* LEFT SIDE */}
+        <div className="grid items-center gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10">
           <div className="relative z-10">
             <TypingEffect />
 
-            <p className="mt-15 max-w-[600px] text-[14px] leading-8 text-gray-400 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <p
+              className="mt-6 max-w-[600px] text-[14px] leading-8 text-gray-400 opacity-0 animate-fade-in"
+              style={{ animationDelay: "0.2s" }}
+            >
               I build scalable SaaS platforms, cloud-native applications,
               and AI-powered products that solve real-world problems and
               deliver measurable business impact.
             </p>
 
-            <p className="mt-4 text-[15px] text-gray-400 opacity-0 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <span className="text-gray-300 hover:text-violet-400 transition-colors cursor-default">Python</span>
+            <p
+              className="mt-4 text-[15px] text-gray-400 opacity-0 animate-fade-in"
+              style={{ animationDelay: "0.4s" }}
+            >
+              <span className="cursor-default text-gray-300 transition-colors hover:text-violet-400">
+                Python
+              </span>
               <span className="mx-2 text-violet-500">·</span>
-              <span className="text-gray-300 hover:text-violet-400 transition-colors cursor-default">TypeScript</span>
+              <span className="cursor-default text-gray-300 transition-colors hover:text-violet-400">
+                TypeScript
+              </span>
               <span className="mx-2 text-violet-500">·</span>
-              <span className="text-gray-300 hover:text-violet-400 transition-colors cursor-default">React</span>
+              <span className="cursor-default text-gray-300 transition-colors hover:text-violet-400">
+                React
+              </span>
               <span className="mx-2 text-violet-500">·</span>
-              <span className="text-gray-300 hover:text-violet-400 transition-colors cursor-default">Next.js</span>
+              <span className="cursor-default text-gray-300 transition-colors hover:text-violet-400">
+                Next.js
+              </span>
               <span className="mx-2 text-violet-500">·</span>
-              <span className="text-gray-300 hover:text-violet-400 transition-colors cursor-default">Node.js</span>
+              <span className="cursor-default text-gray-300 transition-colors hover:text-violet-400">
+                Node.js
+              </span>
               <span className="mx-2 text-violet-500">·</span>
-              <span className="text-gray-300 hover:text-violet-400 transition-colors cursor-default">AI</span>
+              <span className="cursor-default text-gray-300 transition-colors hover:text-violet-400">
+                AI
+              </span>
               <span className="mx-2 text-violet-500">·</span>
-              <span className="text-gray-300 hover:text-violet-400 transition-colors cursor-default">AWS</span>
+              <span className="cursor-default text-gray-300 transition-colors hover:text-violet-400">
+                AWS
+              </span>
             </p>
 
-            {/* Buttons */}
-            <div className="mt-7 flex gap-3">
+            <div className="mt-7 flex flex-wrap gap-3">
               <Link
                 href="/projects"
                 className="inline-flex items-center gap-2 rounded-xl bg-violet-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-violet-500"
@@ -212,90 +231,37 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* RIGHT SIDE */}
-          <div className="relative">
+          <div className="relative min-w-0">
             <DeveloperLaptop />
 
-            {/* Statistics */}
-            <div className="absolute right-[-104px] top-[52%] z-10 hidden w-[210px] -translate-y-1/2 space-y-4 xl:block">
-              <StatCard
-                number="7+"
-                label="Years Experience"
-                icon={
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.7"
-                  >
-                    <rect
-                      x="4"
-                      y="5"
-                      width="16"
-                      height="15"
-                      rx="2"
-                    />
-                    <path d="M8 3v4" />
-                    <path d="M16 3v4" />
-                    <path d="M4 10h16" />
-                  </svg>
-                }
-              />
-
-              <StatCard
-                number="20+"
-                label="Projects Delivered"
-                icon={
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.7"
-                  >
-                    <path d="M8 8h8" />
-                    <path d="M8 12h5" />
-                    <path d="M8 16h4" />
-                    <path d="M5 3h14v18H5z" />
-                  </svg>
-                }
-              />
-
-              <StatCard
-                number="10K+"
-                label="Monthly Users"
-                icon={
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.7"
-                  >
-                    <circle cx="9" cy="8" r="3" />
-                    <circle cx="17" cy="9" r="2" />
-                    <path d="M3 20a6 6 0 0 1 12 0" />
-                    <path d="M14 17a5 5 0 0 1 7 3" />
-                  </svg>
-                }
-              />
+            <div className="pointer-events-none absolute bottom-4 right-4 z-10 hidden w-[200px] space-y-3 2xl:block">
+              {stats.map((stat) => (
+                <StatCard
+                  key={stat.label}
+                  number={stat.number}
+                  label={stat.label}
+                  icon={stat.icon}
+                />
+              ))}
             </div>
           </div>
         </div>
-      </section>
 
-      {/* =====================================================
-          ABOUT PREVIEW
-      ===================================================== */}
+        <div className="mt-8 grid gap-3 sm:grid-cols-3 2xl:hidden">
+          {stats.map((stat) => (
+            <StatCard
+              key={stat.label}
+              number={stat.number}
+              label={stat.label}
+              icon={stat.icon}
+            />
+          ))}
+        </div>
+      </section>
 
       <section className="container-page homepage-container pb-8">
         <div className="card rounded-3xl px-6 py-7 md:px-8">
           <div className="grid gap-6 lg:grid-cols-[1.4fr_0.9fr_0.9fr_0.9fr]">
-            {/* About text */}
             <div>
               <p className="text-[13px] font-medium text-violet-400">
                 About Me
@@ -316,7 +282,6 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Problem Solver */}
             <FeatureCard
               title="Problem Solver"
               description="I enjoy tackling complex engineering challenges with practical and scalable solutions."
@@ -335,7 +300,6 @@ export default function HomePage() {
               }
             />
 
-            {/* Continuous Learner */}
             <FeatureCard
               title="Continuous Learner"
               description="Always exploring Generative AI, emerging technologies, and better engineering approaches."
@@ -355,7 +319,6 @@ export default function HomePage() {
               }
             />
 
-            {/* User Focused */}
             <FeatureCard
               title="User Focused"
               description="I build products that are intuitive for users and valuable for the businesses behind them."
