@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { BriefcaseBusiness, Mail } from "lucide-react";
 import TypingEffect from "@/components/TypingEffect";
-import { site } from "@/data/site";
+import { site, siteStats } from "@/data/site";
 
 export const metadata: Metadata = {
   title: site.role,
@@ -102,65 +102,55 @@ function FeatureCard({
   );
 }
 
-const stats = [
-  {
-    number: "7+",
-    label: "Years Experience",
-    icon: (
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.7"
-      >
-        <rect x="4" y="5" width="16" height="15" rx="2" />
-        <path d="M8 3v4" />
-        <path d="M16 3v4" />
-        <path d="M4 10h16" />
-      </svg>
-    ),
-  },
-  {
-    number: "20+",
-    label: "Projects Delivered",
-    icon: (
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.7"
-      >
-        <path d="M8 8h8" />
-        <path d="M8 12h5" />
-        <path d="M8 16h4" />
-        <path d="M5 3h14v18H5z" />
-      </svg>
-    ),
-  },
-  {
-    number: "10K+",
-    label: "Monthly Users",
-    icon: (
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.7"
-      >
-        <circle cx="9" cy="8" r="3" />
-        <circle cx="17" cy="9" r="2" />
-        <path d="M3 20a6 6 0 0 1 12 0" />
-        <path d="M14 17a5 5 0 0 1 7 3" />
-      </svg>
-    ),
-  },
+const homeStatIcons = [
+  <svg
+    key="years"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+  >
+    <rect x="4" y="5" width="16" height="15" rx="2" />
+    <path d="M8 3v4" />
+    <path d="M16 3v4" />
+    <path d="M4 10h16" />
+  </svg>,
+  <svg
+    key="projects"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+  >
+    <path d="M8 8h8" />
+    <path d="M8 12h5" />
+    <path d="M8 16h4" />
+    <path d="M5 3h14v18H5z" />
+  </svg>,
+  <svg
+    key="users"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+  >
+    <circle cx="9" cy="8" r="3" />
+    <circle cx="17" cy="9" r="2" />
+    <path d="M3 20a6 6 0 0 1 12 0" />
+    <path d="M14 17a5 5 0 0 1 7 3" />
+  </svg>,
 ] as const;
+
+const stats = siteStats.slice(0, 3).map((stat, index) => ({
+  ...stat,
+  icon: homeStatIcons[index],
+}));
 
 export default function HomePage() {
   return (
@@ -174,9 +164,7 @@ export default function HomePage() {
               className="mt-6 max-w-[600px] text-[14px] leading-8 text-gray-400 opacity-0 animate-fade-in"
               style={{ animationDelay: "0.2s" }}
             >
-              I build scalable SaaS platforms, cloud-native applications,
-              and AI-powered products that solve real-world problems and
-              deliver measurable business impact.
+              {site.summary}
             </p>
 
             <p
