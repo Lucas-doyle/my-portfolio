@@ -3,7 +3,11 @@ import {
   BriefcaseBusiness,
   GraduationCap,
 } from "lucide-react";
-import { education, experience } from "@/data/experience";
+import {
+  education,
+  experience,
+  experienceIntro,
+} from "@/data/experience";
 
 export default function ExperiencePage() {
   return (
@@ -18,8 +22,7 @@ export default function ExperiencePage() {
         </h1>
 
         <p className="section-description">
-          Seven years of building scalable software, AI systems and
-          cloud-native products across full-stack engineering roles.
+          {experienceIntro}
         </p>
 
         <div className="relative mt-12">
@@ -28,7 +31,7 @@ export default function ExperiencePage() {
           <div className="space-y-8">
             {experience.map((job) => (
               <article
-                key={job.company}
+                key={`${job.company}-${job.period}`}
                 className="relative pl-9"
               >
                 <div className="absolute left-0 top-5 h-4 w-4 rounded-full border-4 border-[#050816] bg-violet-600" />
@@ -36,7 +39,7 @@ export default function ExperiencePage() {
                 <div className="card rounded-xl p-6 md:p-7">
                   <div className="flex flex-col justify-between gap-4 md:flex-row">
                     <div>
-                      <p className="text-[11px] font-medium text-violet-400">
+                      <p className="text-xs font-medium text-violet-400">
                         {job.period}
                       </p>
 
@@ -49,13 +52,13 @@ export default function ExperiencePage() {
                       </p>
                     </div>
 
-                    <div className="flex h-fit items-center gap-2 text-[11px] text-gray-500">
+                    <div className="flex h-fit items-center gap-2 text-xs text-gray-500">
                       <MapPin size={13} />
                       {job.location}
                     </div>
                   </div>
 
-                  <p className="mt-5 text-xs leading-6 text-gray-500">
+                  <p className="mt-5 text-sm leading-7 text-gray-500">
                     {job.description}
                   </p>
 
@@ -63,11 +66,11 @@ export default function ExperiencePage() {
                     {job.achievements.map((item) => (
                       <div
                         key={item}
-                        className="flex gap-3 text-xs leading-6 text-gray-500"
+                        className="flex gap-3 text-sm leading-7 text-gray-500"
                       >
                         <BriefcaseBusiness
                           size={13}
-                          className="mt-1 shrink-0 text-violet-400"
+                          className="mt-1.5 shrink-0 text-violet-400"
                         />
 
                         <span>{item}</span>
@@ -87,8 +90,8 @@ export default function ExperiencePage() {
                 <GraduationCap size={19} />
               </div>
 
-              <div>
-                <p className="text-[11px] text-violet-400">
+              <div className="min-w-0">
+                <p className="text-xs text-violet-400">
                   Education
                 </p>
 
@@ -96,12 +99,16 @@ export default function ExperiencePage() {
                   {education.degree}
                 </h2>
 
-                <p className="mt-1 text-xs text-gray-400">
+                <p className="mt-1 text-sm text-gray-400">
                   {education.school}
                 </p>
 
-                <p className="mt-1 text-[11px] text-gray-600">
+                <p className="mt-1 text-xs text-gray-500">
                   {education.period} · {education.location}
+                </p>
+
+                <p className="mt-4 max-w-3xl text-sm leading-7 text-gray-500">
+                  {education.summary}
                 </p>
               </div>
             </div>

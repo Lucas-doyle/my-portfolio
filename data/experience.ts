@@ -12,7 +12,7 @@ export type Job = {
 export const experience: Job[] = [
   {
     company: "Tines",
-    role: "AI Full Stack Software Engineer",
+    role: site.role,
     period: "2025 — Present",
     location: site.location,
     description:
@@ -65,4 +65,9 @@ export const education = {
   school: "University College Dublin",
   period: "2014 — 2018",
   location: site.location,
+  summary:
+    "University College Dublin is a leading research university in Ireland. During my BSc, I built a strong foundation in software engineering, algorithms, and systems design, while learning to turn complex problems into practical solutions.",
 } as const;
+
+export const experienceIntro =
+  `${site.yearsExperience} years of building scalable software, AI systems, and cloud-native products across full-stack engineering roles.` as const;

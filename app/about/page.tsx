@@ -270,10 +270,7 @@ export default function AboutPage() {
             </p>
 
             <p className="mt-4 text-sm leading-7 text-gray-500">
-              University College Dublin is a leading research university in
-              Ireland. During my BSc, I built a strong foundation in software
-              engineering, algorithms, and systems design, while learning to
-              turn complex problems into practical solutions.
+              {education.summary}
             </p>
 
             <div className="mt-5 flex justify-between gap-4">
