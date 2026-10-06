@@ -15,7 +15,8 @@ export default function SkillsPage() {
 
         <p className="section-description">
           Technologies I work with to build intelligent, scalable
-          and production-ready products.
+          and production-ready products. Levels reflect relative
+          day-to-day strength, not a claim of mastery.
         </p>
 
         <div className="mt-12 grid gap-x-14 gap-y-12 lg:grid-cols-2">
@@ -37,12 +38,12 @@ export default function SkillsPage() {
                 <div className="space-y-5">
                   {group.skills.map(([skill, level]) => (
                     <div key={skill}>
-                      <div className="mb-2 flex justify-between">
+                      <div className="mb-2 flex justify-between gap-3">
                         <span className="text-xs text-gray-400">
                           {skill}
                         </span>
 
-                        <span className="text-[10px] text-gray-600">
+                        <span className="text-xs text-gray-500">
                           {level}%
                         </span>
                       </div>
@@ -75,21 +76,14 @@ export default function SkillsPage() {
             </h2>
           </div>
 
-          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {technologies.map((technology, index) => {
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            {technologies.map((technology) => {
               const Icon = technology.icon;
-              const isLastTwo = index >= technologies.length - 2;
 
               return (
                 <div
                   key={technology.name}
-                  className={`card flex min-h-[76px] items-center gap-3 rounded-xl px-4 py-3 transition-all duration-300 hover:border-violet-500/30 hover:bg-white/[0.03] ${
-                    isLastTwo
-                      ? index === technologies.length - 2
-                        ? "lg:col-start-2"
-                        : "lg:col-start-3"
-                      : ""
-                  }`}
+                  className="card flex min-h-[76px] items-center gap-3 rounded-xl px-4 py-3 transition-all duration-300 hover:border-violet-500/30 hover:bg-white/[0.03]"
                 >
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.05]">
                     <Icon
@@ -105,7 +99,7 @@ export default function SkillsPage() {
                       {technology.name}
                     </p>
 
-                    <p className="mt-1 text-[10px] leading-4 text-gray-600">
+                    <p className="mt-1 text-[11px] leading-4 text-gray-500">
                       {technology.category}
                     </p>
                   </div>
