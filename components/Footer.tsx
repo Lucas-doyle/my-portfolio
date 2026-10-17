@@ -1,4 +1,4 @@
-import { Mail } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { site, siteLinks } from "@/data/site";
 
@@ -16,17 +16,25 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <a
               href={siteLinks.email}
-              aria-label="Email"
+              aria-label={`Email ${site.email}`}
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-400 transition hover:border-violet-500/40 hover:text-violet-400"
             >
               <Mail size={15} />
             </a>
 
             <a
+              href={siteLinks.phone}
+              aria-label={`Call ${site.phone}`}
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-400 transition hover:border-violet-500/40 hover:text-violet-400"
+            >
+              <Phone size={15} />
+            </a>
+
+            <a
               href={siteLinks.github}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="GitHub"
+              aria-label="GitHub profile"
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-400 transition hover:border-violet-500/40 hover:text-violet-400"
             >
               <FaGithub size={15} />

@@ -8,6 +8,7 @@ import {
   Globe,
   Paperclip,
 } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import { useState } from "react";
 import { site, siteLinks } from "@/data/site";
 import {
@@ -115,16 +116,18 @@ export default function ContactPage() {
               </p>
 
               <div className="mt-9 space-y-6">
-                  <ContactItem
-                    icon={<Mail size={16} />}
-                    title="Email"
-                    value={site.email}
-                  />
+                <ContactItem
+                  icon={<Mail size={16} />}
+                  title="Email"
+                  value={site.email}
+                  href={siteLinks.email}
+                />
 
                 <ContactItem
                   icon={<Phone size={16} />}
                   title="Phone"
                   value={site.phone}
+                  href={siteLinks.phone}
                 />
 
                 <ContactItem
@@ -143,7 +146,8 @@ export default function ContactPage() {
               <div className="mt-8 flex gap-2">
                 <a
                   href={siteLinks.email}
-                  className="group relative flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-500 hover:border-violet-500/30 hover:text-violet-400"
+                  aria-label={`Email ${site.email}`}
+                  className="group relative flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-500 transition hover:border-violet-500/30 hover:text-violet-400"
                 >
                   <Mail size={15} />
                   <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[12px] text-white opacity-0 transition group-hover:opacity-100">
@@ -153,7 +157,8 @@ export default function ContactPage() {
 
                 <a
                   href={siteLinks.phone}
-                  className="group relative flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-500 hover:border-violet-500/30 hover:text-violet-400"
+                  aria-label={`Call ${site.phone}`}
+                  className="group relative flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-500 transition hover:border-violet-500/30 hover:text-violet-400"
                 >
                   <Phone size={15} />
                   <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[12px] text-white opacity-0 transition group-hover:opacity-100">
@@ -165,9 +170,10 @@ export default function ContactPage() {
                   href={siteLinks.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-500 hover:border-violet-500/30 hover:text-violet-400"
+                  aria-label="GitHub profile"
+                  className="group relative flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-500 transition hover:border-violet-500/30 hover:text-violet-400"
                 >
-                  <Globe size={15} />
+                  <FaGithub size={15} />
                   <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[12px] text-white opacity-0 transition group-hover:opacity-100">
                     GitHub
                   </span>
@@ -308,10 +314,12 @@ function ContactItem({
   icon,
   title,
   value,
+  href,
 }: {
   icon: React.ReactNode;
   title: string;
   value: string;
+  href?: string;
 }) {
   return (
     <div className="flex gap-3">
@@ -320,13 +328,22 @@ function ContactItem({
       </div>
 
       <div>
-        <p className="text-[10px] text-gray-600">
+        <p className="text-xs text-gray-500">
           {title}
         </p>
 
-        <p className="mt-1 text-xs text-gray-300">
-          {value}
-        </p>
+        {href ? (
+          <a
+            href={href}
+            className="mt-1 block text-xs text-gray-300 transition hover:text-violet-400"
+          >
+            {value}
+          </a>
+        ) : (
+          <p className="mt-1 text-xs text-gray-300">
+            {value}
+          </p>
+        )}
       </div>
     </div>
   );
