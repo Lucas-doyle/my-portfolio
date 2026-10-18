@@ -6,9 +6,18 @@ import TypingEffect from "@/components/TypingEffect";
 import { site, siteStats } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: site.role,
-  description:
-    "Portfolio of an AI Full Stack Software Engineer specializing in Generative AI, Python, TypeScript, React and Next.js.",
+  title: {
+    absolute: site.role,
+  },
+  description: site.description,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: site.role,
+    description: site.description,
+    url: "/",
+  },
 };
 
 function SmallIcon({

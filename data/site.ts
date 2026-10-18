@@ -1,3 +1,8 @@
+/** Public origin for canonicals, sitemap, and Open Graph. Override at build time. */
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://lucas-doyle.vercel.app"
+).replace(/\/$/, "");
+
 export const site = {
   role: "AI Full Stack Software Engineer",
   email: "bruno.silva.94410@gmail.com",
@@ -10,6 +15,8 @@ export const site = {
     "AI Full Stack Software Engineer with 7 years of experience designing, building, and scaling SaaS platforms, cloud-native applications, and AI-powered products.",
   focus:
     "I specialize in Python, TypeScript, React, Next.js, Node.js, Generative AI, Retrieval-Augmented Generation, AI agents, vector databases, and workflow automation.",
+  description:
+    "Portfolio of an AI Full Stack Software Engineer specializing in Generative AI, Python, TypeScript, React and Next.js.",
 } as const;
 
 export const siteStats = [

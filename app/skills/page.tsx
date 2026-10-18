@@ -1,5 +1,22 @@
+import type { Metadata } from "next";
 import { Boxes } from "lucide-react";
 import { skillGroups, technologies } from "@/data/skills";
+import { site } from "@/data/site";
+
+export const metadata: Metadata = {
+  title: "Skills",
+  description:
+    "Python, TypeScript, React, Next.js, Generative AI, RAG, vector databases, and cloud-native stack — with honest proficiency levels.",
+  alternates: {
+    canonical: "/skills",
+  },
+  openGraph: {
+    title: `Skills | ${site.role}`,
+    description:
+      "Python, TypeScript, React, Next.js, Generative AI, RAG, vector databases, and cloud-native stack — with honest proficiency levels.",
+    url: "/skills",
+  },
+};
 
 export default function SkillsPage() {
   return (

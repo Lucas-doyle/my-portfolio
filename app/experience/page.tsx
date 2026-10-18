@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   MapPin,
   BriefcaseBusiness,
@@ -8,6 +9,20 @@ import {
   experience,
   experienceIntro,
 } from "@/data/experience";
+import { site } from "@/data/site";
+
+export const metadata: Metadata = {
+  title: "Experience",
+  description: experienceIntro,
+  alternates: {
+    canonical: "/experience",
+  },
+  openGraph: {
+    title: `Experience | ${site.role}`,
+    description: experienceIntro,
+    url: "/experience",
+  },
+};
 
 export default function ExperiencePage() {
   return (

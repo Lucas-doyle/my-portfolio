@@ -1,8 +1,22 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Mail } from "lucide-react";
 import { site, siteStats } from "@/data/site";
 import { education, experience } from "@/data/experience";
+
+export const metadata: Metadata = {
+  title: "About",
+  description: site.summary,
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: `About | ${site.role}`,
+    description: site.summary,
+    url: "/about",
+  },
+};
 
 function SmallIcon({
   children,

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -8,7 +9,12 @@ import {
 } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { projects } from "@/data/projects";
+import { site } from "@/data/site";
 import ScrollToTop from "@/components/ScrollToTop";
+
+type ProjectPageProps = {
+  params: Promise<{ slug: string }>;
+};
 
 export function generateStaticParams() {
   return projects.map((project) => ({
@@ -16,11 +22,49 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function ProjectPage({
+export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+}: ProjectPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projects.find((item) => item.slug === slug);
+
+  if (!project) {
+    return {
+      title: "Project not found",
+    };
+  }
+
+  const title = project.title;
+  const description = project.description;
+  const path = `/projects/${project.slug}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: path,
+    },
+    openGraph: {
+      title: `${title} | ${site.role}`,
+      description,
+      url: path,
+      images: [
+        {
+          url: project.image,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [project.image],
+    },
+  };
+}
+
+export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
 
   const project = projects.find(
