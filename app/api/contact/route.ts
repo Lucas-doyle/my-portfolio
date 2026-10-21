@@ -5,7 +5,7 @@ import { getClientIp, rateLimit } from "@/lib/rate-limit";
 import {
   CONTACT_MAX_FILE_BYTES,
   CONTACT_MAX_FILES,
-  isAllowedContactFileType,
+  isAllowedContactFile,
   safeAttachmentName,
 } from "@/lib/contact-files";
 
@@ -92,7 +92,7 @@ export async function POST(request: NextRequest) {
     }
 
     for (const file of uploaded) {
-      if (!isAllowedContactFileType(file.type)) {
+      if (!isAllowedContactFile(file)) {
         return NextResponse.json(
           { error: "Only images, PDF, and text files are allowed." },
           { status: 400 },

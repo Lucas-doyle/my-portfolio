@@ -15,6 +15,7 @@ import {
   CONTACT_ACCEPT,
   CONTACT_MAX_FILE_BYTES,
   CONTACT_MAX_FILES,
+  isAllowedContactFile,
 } from "@/lib/contact-files";
 
 export default function ContactPage() {
@@ -238,7 +239,7 @@ export default function ContactPage() {
               <label className="mt-4 flex cursor-pointer items-center gap-2 rounded-lg border border-dashed border-white/10 bg-[#080d1d] px-4 py-3 text-xs text-gray-500 transition hover:border-violet-500/40 hover:text-gray-300">
                 <Paperclip size={14} className="text-violet-400" />
                 <span>
-                  Attach images or files
+                  Attach images, PDF, or text
                   {files.length > 0
                     ? ` (${files.length} selected)`
                     : ` (message or file required, max ${CONTACT_MAX_FILES})`}
@@ -266,6 +267,15 @@ export default function ContactPage() {
                     if (tooLarge) {
                       setSubmitStatus('error');
                       setErrorMessage('Each file must be 5MB or smaller.');
+                      event.target.value = '';
+                      return;
+                    }
+
+                    if (selected.some((file) => !isAllowedContactFile(file))) {
+                      setSubmitStatus('error');
+                      setErrorMessage(
+                        'Only images, PDF, and text files are allowed.',
+                      );
                       event.target.value = '';
                       return;
                     }
