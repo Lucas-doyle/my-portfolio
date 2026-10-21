@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="iconShieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+  </defs>
+  <path d="M50,5 L90,20 L90,60 C90,80 70,95 50,95 C30,95 10,80 10,60 L10,20 Z" fill="url(#iconShieldGrad)" />
+  <path d="M50,15 L80,28 L80,60 C80,75 65,88 50,88 C35,88 20,75 20,60 L20,28 Z" fill="rgba(255,255,255,0.2)" />
+  <circle cx="50" cy="50" r="15" fill="#F59E0B" />
+  <path d="M50,40 L55,48 L63,48 L57,54 L59,62 L50,57 L41,62 L43,54 L37,48 L45,48 Z" fill="white" />
+</svg>
