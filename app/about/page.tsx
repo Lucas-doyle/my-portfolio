@@ -235,7 +235,7 @@ export default function AboutPage() {
                   <p className="text-xs font-semibold text-white">
                     AI Engineering
                   </p>
-                  <p className="mt-1 text-[11px] text-gray-500">
+                  <p className="mt-1 text-xs text-gray-500">
                     RAG · Agents · LLMs
                   </p>
                 </div>
@@ -248,7 +248,7 @@ export default function AboutPage() {
                 <span className="text-blue-300">AI</span>
                 <span className="text-purple-400">/&gt;</span>
               </div>
-              <p className="mt-1 text-[11px] text-gray-500">
+              <p className="mt-1 text-xs text-gray-500">
                 Python · TypeScript
               </p>
             </div>

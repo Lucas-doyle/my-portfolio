@@ -76,7 +76,7 @@ function StatCard({
 
       <div>
         <p className="text-xl font-bold leading-none text-white">{number}</p>
-        <p className="text-[11px] text-gray-400">{label}</p>
+        <p className="text-xs text-gray-400">{label}</p>
       </div>
     </div>
   );

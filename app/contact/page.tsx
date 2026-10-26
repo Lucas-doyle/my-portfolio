@@ -198,53 +198,95 @@ export default function ContactPage() {
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
-                <input
-                  name="name"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="h-12 rounded-lg border border-white/10 bg-[#080d1d] px-4 text-xs text-white outline-none placeholder:text-gray-600 focus:border-violet-500/60"
-                />
+                <div>
+                  <label
+                    htmlFor="contact-name"
+                    className="mb-1.5 block text-xs font-medium text-gray-400"
+                  >
+                    Name
+                  </label>
+                  <input
+                    id="contact-name"
+                    name="name"
+                    placeholder="Your name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    autoComplete="name"
+                    className="h-12 w-full rounded-lg border border-white/10 bg-[#080d1d] px-4 text-xs text-white placeholder:text-gray-600 focus:border-violet-500/60"
+                  />
+                </div>
 
+                <div>
+                  <label
+                    htmlFor="contact-email"
+                    className="mb-1.5 block text-xs font-medium text-gray-400"
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="contact-email"
+                    name="email"
+                    placeholder="you@example.com"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    autoComplete="email"
+                    className="h-12 w-full rounded-lg border border-white/10 bg-[#080d1d] px-4 text-xs text-white placeholder:text-gray-600 focus:border-violet-500/60"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <label
+                  htmlFor="contact-subject"
+                  className="mb-1.5 block text-xs font-medium text-gray-400"
+                >
+                  Subject
+                </label>
                 <input
-                  name="email"
-                  placeholder="Your Email"
-                  type="email"
-                  value={formData.email}
+                  id="contact-subject"
+                  name="subject"
+                  placeholder="What is this about?"
+                  value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="h-12 rounded-lg border border-white/10 bg-[#080d1d] px-4 text-xs text-white outline-none placeholder:text-gray-600 focus:border-violet-500/60"
+                  className="h-12 w-full rounded-lg border border-white/10 bg-[#080d1d] px-4 text-xs text-white placeholder:text-gray-600 focus:border-violet-500/60"
                 />
               </div>
 
-              <input
-                name="subject"
-                placeholder="Subject"
-                value={formData.subject}
-                onChange={handleChange}
-                required
-                className="mt-4 h-12 w-full rounded-lg border border-white/10 bg-[#080d1d] px-4 text-xs text-white outline-none placeholder:text-gray-600 focus:border-violet-500/60"
-              />
+              <div className="mt-4">
+                <label
+                  htmlFor="contact-message"
+                  className="mb-1.5 block text-xs font-medium text-gray-400"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  placeholder="Your message (or attach a file below)"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={8}
+                  className="w-full resize-none rounded-lg border border-white/10 bg-[#080d1d] px-4 py-4 text-xs text-white placeholder:text-gray-600 focus:border-violet-500/60"
+                />
+              </div>
 
-              <textarea
-                name="message"
-                placeholder="Your Message (or attach a file below)"
-                value={formData.message}
-                onChange={handleChange}
-                rows={8}
-                className="mt-4 w-full resize-none rounded-lg border border-white/10 bg-[#080d1d] px-4 py-4 text-xs text-white outline-none placeholder:text-gray-600 focus:border-violet-500/60"
-              />
-
-              <label className="mt-4 flex cursor-pointer items-center gap-2 rounded-lg border border-dashed border-white/10 bg-[#080d1d] px-4 py-3 text-xs text-gray-500 transition hover:border-violet-500/40 hover:text-gray-300">
+              <label
+                htmlFor="contact-files"
+                className="mt-4 flex cursor-pointer items-center gap-2 rounded-lg border border-dashed border-white/10 bg-[#080d1d] px-4 py-3 text-xs text-gray-500 transition hover:border-violet-500/40 hover:text-gray-300"
+              >
                 <Paperclip size={14} className="text-violet-400" />
                 <span>
-                  Attach images, PDF, or text
+                  Attach images, PDF, DOCX, or text
                   {files.length > 0
                     ? ` (${files.length} selected)`
                     : ` (message or file required, max ${CONTACT_MAX_FILES})`}
                 </span>
                 <input
+                  id="contact-files"
                   type="file"
                   name="files"
                   multiple
@@ -274,7 +316,7 @@ export default function ContactPage() {
                     if (selected.some((file) => !isAllowedContactFile(file))) {
                       setSubmitStatus('error');
                       setErrorMessage(
-                        'Only images, PDF, and text files are allowed.',
+                        'Only images, PDF, DOCX, and text files are allowed.',
                       );
                       event.target.value = '';
                       return;
@@ -287,7 +329,7 @@ export default function ContactPage() {
                 />
               </label>
               {files.length > 0 && (
-                <p className="mt-2 text-[11px] text-gray-500">
+                <p className="mt-2 text-xs text-gray-500">
                   {files.map((file) => file.name).join(', ')}
                 </p>
               )}

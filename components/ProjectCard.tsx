@@ -22,7 +22,7 @@ export default function ProjectCard({
 
       <div className="p-5">
         <div className="flex items-center justify-between">
-          <span className="text-[10px] text-violet-400">
+          <span className="text-xs text-violet-400">
             {project.category}
           </span>
 
@@ -44,7 +44,7 @@ export default function ProjectCard({
           {project.technologies.slice(0, 4).map((technology, index) => (
             <span
               key={`${technology}-${index}`}
-              className="rounded-md border border-white/10 bg-white/[0.02] px-2 py-1 text-[9px] text-gray-500"
+              className="rounded-md border border-white/10 bg-white/[0.02] px-2 py-1 text-xs text-gray-500"
             >
               {technology}
             </span>

@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
     for (const file of uploaded) {
       if (!isAllowedContactFile(file)) {
         return NextResponse.json(
-          { error: "Only images, PDF, and text files are allowed." },
+          { error: "Only images, PDF, DOCX, and text files are allowed." },
           { status: 400 },
         );
       }

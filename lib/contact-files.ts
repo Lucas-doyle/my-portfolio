@@ -6,10 +6,11 @@ export const CONTACT_ALLOWED_TYPES = [
   "image/webp",
   "image/gif",
   "application/pdf",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
   "text/plain",
 ] as const;
 
-export const CONTACT_ACCEPT = ".jpg,.jpeg,.png,.webp,.gif,.pdf,.txt";
+export const CONTACT_ACCEPT = ".jpg,.jpeg,.png,.webp,.gif,.pdf,.docx,.txt";
 
 const CONTACT_ALLOWED_EXTENSIONS = new Set([
   ".jpg",
@@ -18,6 +19,7 @@ const CONTACT_ALLOWED_EXTENSIONS = new Set([
   ".webp",
   ".gif",
   ".pdf",
+  ".docx",
   ".txt",
 ]);
 
@@ -27,7 +29,7 @@ export function isAllowedContactFileType(type: string): type is AllowedType {
   return (CONTACT_ALLOWED_TYPES as readonly string[]).includes(type);
 }
 
-/** MIME when present; otherwise fall back to extension (empty type is common for PDFs). */
+/** MIME when present; otherwise fall back to extension (empty type is common for PDFs/DOCX). */
 export function isAllowedContactFile(file: {
   type: string;
   name: string;

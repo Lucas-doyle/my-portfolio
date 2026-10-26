@@ -46,7 +46,7 @@ The contact form accepts optional files through Resend attachments:
 
 - Up to 3 files
 - 5MB per file
-- Images (JPEG, PNG, WebP, GIF), PDF, and plain text
+- Images (JPEG, PNG, WebP, GIF), PDF, DOCX, and plain text
 
 ## Important
 

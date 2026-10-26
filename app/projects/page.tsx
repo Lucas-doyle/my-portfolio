@@ -188,7 +188,7 @@ export default function ProjectsPage() {
               onClick={() => {
                 persistListState(category.id, showAllProjects);
               }}
-              className={`rounded-lg px-4 py-2 text-[10px] transition ${
+              className={`rounded-lg px-4 py-2 text-xs transition ${
                 selectedFilter === category.id
                   ? "bg-violet-600 text-white"
                   : "border border-white/10 text-gray-500 hover:text-white hover:border-white/20"

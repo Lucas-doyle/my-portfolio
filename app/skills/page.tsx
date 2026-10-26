@@ -116,7 +116,7 @@ export default function SkillsPage() {
                       {technology.name}
                     </p>
 
-                    <p className="mt-1 text-[11px] leading-4 text-gray-500">
+                    <p className="mt-1 text-xs leading-4 text-gray-500">
                       {technology.category}
                     </p>
                   </div>

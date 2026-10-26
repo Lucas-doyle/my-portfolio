@@ -26,6 +26,7 @@ export default function Navbar() {
       <div className="container-page flex h-[70px] items-center justify-between">
         <Link
           href="/"
+          aria-label="Home"
           className="flex items-center gap-2"
           onClick={() => setMobileOpen(false)}
         >
@@ -54,7 +55,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative py-2 text-[11px] transition ${
+                className={`relative py-2 text-xs transition ${
                   active
                     ? "text-violet-400"
                     : "text-gray-400 hover:text-white"

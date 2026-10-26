@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import { site, siteUrl } from "@/data/site";
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-outfit",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -38,12 +45,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
-      <body>
+    <html lang="en" data-scroll-behavior="smooth" className={outfit.variable}>
+      <body className={outfit.className}>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
+
         <Navbar />
         <CustomCursor />
 
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
 
         <Footer />
       </body>
